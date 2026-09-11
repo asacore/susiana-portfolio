@@ -387,7 +387,7 @@ export default function Home() {
           <p className="w-full text-xl sm:text-2xl md:text-[26px] lg:text-[29px] leading-snug md:leading-normal text-ink dark:text-white font-normal">
             <strong className="font-bold">Hi there!</strong> I&apos;m{" "}
             <span className="text-pink font-bold">Susiana Salsa Putri</span>, an{" "}
-            Information Systems graduate, Graphic Designer, UI/UX Designer, and Web Development. Obsessed with clean visuals and functional code, I help turn complex concepts into engaging digital products.
+            Information Systems graduate, Graphic Designer, UI/UX Designer, and Web Developer. Obsessed with clean visuals and functional code, I help turn complex concepts into engaging digital products.
           </p>
         </Reveal>
 
