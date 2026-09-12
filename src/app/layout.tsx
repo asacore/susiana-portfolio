@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./theme-provider";
+import { Analytics } from "@vercel/analytics/next";
 
 const altee = localFont({
   src: [
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={`${altee.variable} ${altee.className} bg-white dark:bg-ink text-ink dark:text-white transition-colors`}>
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
