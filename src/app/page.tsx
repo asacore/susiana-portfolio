@@ -42,7 +42,7 @@ function useScrollReveal() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
     );
 
     observer.observe(el);
@@ -109,6 +109,7 @@ export default function Home() {
   const [certCurrentPage, setCertCurrentPage] = useState<number>(1);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [selectedGalleryPhoto, setSelectedGalleryPhoto] = useState<string | null>(null);
   const [galleryDotIndex, setGalleryDotIndex] = useState<number>(0);
   const galleryScrollRef = useRef<HTMLDivElement>(null);
@@ -487,12 +488,12 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Right: Connect + ThemeToggle */}
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            {/* Let's Connect Button — Responsive in Light & Dark Mode */}
+          {/* Right: Connect (desktop) + Hamburger + ThemeToggle */}
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+            {/* Let's Connect Button — desktop only, moved into burger menu on mobile */}
             <a
               href="#contact"
-              className="group relative inline-flex items-center justify-center px-3.5 sm:px-5 py-1.5 sm:py-[7px] rounded-full text-[13px] sm:text-[15px] lg:text-[17px] font-bold whitespace-nowrap overflow-hidden transition-colors duration-300 border-2 border-magenta dark:border-pink/80 text-magenta dark:text-white bg-white dark:bg-[#180010] hover:text-white dark:hover:text-white hover:border-pink dark:hover:border-pink shrink-0"
+              className="hidden md:group md:relative md:inline-flex items-center justify-center px-3.5 sm:px-5 py-1.5 sm:py-[7px] rounded-full text-[13px] sm:text-[15px] lg:text-[17px] font-bold whitespace-nowrap overflow-hidden transition-colors duration-300 border-2 border-magenta dark:border-pink/80 text-magenta dark:text-white bg-white dark:bg-[#180010] hover:text-white dark:hover:text-white hover:border-pink dark:hover:border-pink shrink-0"
             >
               <span
                 className="absolute inset-0 bg-gradient-to-b from-[#FA198B] to-[#B91372] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -500,7 +501,78 @@ export default function Home() {
               />
               <span className="relative z-10">Let&apos;s Connect!</span>
             </a>
+
+            {/* Hamburger — mobile only, modern morphing icon, no border/circle */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+              className="md:hidden relative flex items-center justify-center w-9 h-9 rounded-lg text-magenta dark:text-white shrink-0 transition-colors hover:bg-magenta/[0.08] dark:hover:bg-white/10"
+            >
+              <span className="relative flex flex-col items-center justify-center w-[18px] h-[13px]">
+                <span
+                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    mobileMenuOpen ? "rotate-45 top-1/2 -translate-y-1/2" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute h-[2px] bg-current rounded-full transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] top-1/2 -translate-y-1/2 ${
+                    mobileMenuOpen ? "w-0 opacity-0" : "w-full opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    mobileMenuOpen ? "-rotate-45 top-1/2 -translate-y-1/2" : "bottom-0"
+                  }`}
+                />
+              </span>
+            </button>
+
             <ThemeToggle />
+          </div>
+        </div>
+
+        {/* Mobile dropdown menu — links + Connect CTA, shown below the bar */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] border-t border-[#31081F]/10 dark:border-[#31081F]/30 bg-white/98 dark:bg-ink/98 backdrop-blur-md ${
+            mobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-t-0"
+          }`}
+        >
+          <div className="px-4 sm:px-8 py-4 flex flex-col gap-4 text-[17px] font-normal">
+            <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              style={{ color: "#B91372" }}
+              className="hover:opacity-70 transition-opacity"
+            >
+              about
+            </a>
+            <a
+              href="#journey"
+              onClick={() => setMobileMenuOpen(false)}
+              style={{ color: "#B91372" }}
+              className="hover:opacity-70 transition-opacity"
+            >
+              experiences
+            </a>
+            <a
+              href="#works"
+              onClick={() => setMobileMenuOpen(false)}
+              style={{ color: "#B91372" }}
+              className="hover:opacity-70 transition-opacity"
+            >
+              works
+            </a>
+
+            {/* Let's Connect — inside mobile menu */}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-1 inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full text-[15px] font-bold bg-gradient-to-b from-[#FA198B] to-[#B91372] text-white shadow-sm transition-transform active:scale-95"
+            >
+              Let&apos;s Connect!
+            </a>
           </div>
         </div>
       </nav>
@@ -1718,7 +1790,7 @@ export default function Home() {
 
           {/* Modal Content */}
           <div
-            className="relative max-w-5xl w-full max-h-[94vh] flex flex-col items-center justify-center overflow-y-auto py-2 custom-scrollbar"
+            className="relative max-w-5xl w-full max-h-[94vh] flex flex-col items-center justify-center overflow-y-auto py-2 custom-scrollbar animate-modalPopIn"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image Preview Area */}
@@ -1940,7 +2012,7 @@ export default function Home() {
           onClick={() => setSelectedGalleryPhoto(null)}
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center"
+            className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center animate-modalPopIn"
             onClick={(e) => e.stopPropagation()}
           >
             <button
