@@ -14,7 +14,7 @@ export interface ProjectLinks {
 export interface ProjectItem {
   id: string;
   title: string;
-  category: "Graphic Design" | "UI/UX Design";
+  category: "Graphic Design" | "UI/UX Design" | "Web Development";
   institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study";
   tag: string;
   image: string;
@@ -30,9 +30,45 @@ export interface ProjectItem {
 }
 
 export const projectsData: ProjectItem[] = [
+
+  /* ══════════════════════════════════════════════════════════════════
+     WEB DEVELOPMENT (Academic / Thesis Project)
+     ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "web-jajanbekasi",
+    title: "JajanBekasi! — Local Culinary Recommendation Website",
+    category: "Web Development",
+    institution: "Gunadarma University",
+    tag: "Thesis Project",
+    image: "/project web/jajanbekasi.png",
+    width: 1920,
+    height: 1080,
+    featured: true,
+    description:
+      "JajanBekasi! is a web-based local culinary recommendation platform for Bekasi City, developed as a thesis project. The system applies content-based filtering and KNN to generate relevant culinary recommendations, complemented by a rule-based chatbot to help users discover local food options.",
+    links: {
+      live: "https://jajanbekasi.web.id/",
+    },
+  },
   /* ══════════════════════════════════════════════════════════════════
      UI/UX DESIGN (GDGoC Gunadarma / Case Studies)
      ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "uiux-d2fashion",
+    title: "D Two Fashion Web Application",
+    category: "UI/UX Design",
+    institution: "Gunadarma University",
+    tag: "research project",
+    image: "/uiux/d2fashion.png",
+    width: 6302,
+    height: 5105,
+    featured: true,
+    description:
+      "A UI/UX web design project for D Two Fashion aiming to digitize and streamline product management. Developed through the Design Thinking framework using Figma and validated via Maze usability testing, achieving an Excellent Usability Score of 92 and 98% SUS score.",
+    links: {
+      prototype: "https://www.figma.com/proto/wwaJU6ThGMwKv3sqFPTEG9/D-Two-Fashion?page-id=4%3A4&node-id=400-135&starting-point-node-id=400%3A135&t=woQCl5o8quvwAafS-1",
+    },
+  },
   {
     id: "uiux-delicieux",
     title: "Delicieux — French Dessert Mobile App",
@@ -60,15 +96,15 @@ export const projectsData: ProjectItem[] = [
     width: 2909,
     height: 1404,
     featured: true,
+    description:
+      "A collaborative redesign of BCA Mobile Banking by Susiana Salsa Putri, Amara, Huwaida, and Rosalinda, focused on improving usability and modernizing the interface while maintaining BCA’s brand identity. The result offers cleaner navigation, clearer visuals, and a more secure, user-friendly banking experience.",
     links: {
       prototype: "https://www.figma.com/proto/bca-mobile-redesign-example",
-      github: "https://github.com/susianasalsa/bca-redesign",
-      instagram: "https://www.instagram.com/p/example-bca",
     },
   },
   {
     id: "uiux-ecommerce",
-    title: "Mobile E-Commerce Shopping Experience",
+    title: "Mobile E-Commerce Gaming Experience",
     category: "UI/UX Design",
     institution: "UI/UX Case Study",
     tag: "Mobile App UI/UX",
@@ -77,7 +113,6 @@ export const projectsData: ProjectItem[] = [
     height: 2942,
     links: {
       prototype: "https://www.figma.com/proto/ecommerce-mobile-example",
-      github: "https://github.com/susianasalsa/ecommerce-mobile",
     },
     featured: true,
   },
@@ -85,7 +120,7 @@ export const projectsData: ProjectItem[] = [
     id: "uiux-notes",
     title: "Minimalist Notes & Productivity App",
     category: "UI/UX Design",
-    institution: "UI/UX Case Study",
+    institution: "Gunadarma University",
     tag: "Productivity App UI",
     image: "/uiux/notes.png",
     width: 10272,
@@ -169,7 +204,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "io-vbg-zoom",
-    title: "Virtual Background: IoT Class & Webinars",
+    title: "Virtual Background: IoT Weekly Class",
     category: "Graphic Design",
     institution: "Gunadarma I/O",
     tag: "Virtual Asset",
@@ -306,7 +341,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "io-kartini",
-    title: "Peringatan Hari Kartini",
+    title: "Kartini Day",
     category: "Graphic Design",
     institution: "Gunadarma I/O",
     tag: "National Commemoration",
@@ -319,7 +354,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "io-hut-ri",
-    title: "Dirgahayu Republik Indonesia (17 Agustus)",
+    title: "Indonesian Independence day",
     category: "Graphic Design",
     institution: "Gunadarma I/O",
     tag: "National Commemoration",
@@ -336,7 +371,7 @@ export const projectsData: ProjectItem[] = [
      ══════════════════════════════════════════════════════════════════ */
   {
     id: "mhg-idcard-lanyard",
-    title: "Official Crew ID Card & Lanyard",
+    title: "Official Member ID Card & Lanyard",
     category: "Graphic Design",
     institution: "Media Mahasiswa Gunadarma",
     tag: "Corporate Identity",
@@ -359,11 +394,11 @@ export const projectsData: ProjectItem[] = [
       },
     ],
     description:
-      "This ID card and lanyard design was created for Media Mahasiswa Gunadarma to reflect identity, pride, and professionalism, showcasing the organization's creative and collaborative spirit.",
+      "This ID card and lanyard design was created for Media Mahasiswa Gunadarma to reflect the organization's identity, pride, and professionalism, while also showcasing its creative and collaborative spirit.",
   },
   {
     id: "mhg-sertifikat",
-    title: "Sertifikat Apresiasi Kru MHG",
+    title: "Certificate of Appreciation for Media Mahasiswa Gunadarma Members",
     category: "Graphic Design",
     institution: "Media Mahasiswa Gunadarma",
     tag: "Award & Certificate",
@@ -373,7 +408,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "mhg-oprec",
-    title: "Open Recruitment Crew Media Mahasiswa",
+    title: "Open Recruitment Media Mahasiswa Gunadarma",
     category: "Graphic Design",
     institution: "Media Mahasiswa Gunadarma",
     tag: "Recruitment Campaign",

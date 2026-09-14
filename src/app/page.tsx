@@ -78,6 +78,13 @@ function Reveal({
 }
 
 const ITEMS_PER_PAGE = 12;
+const CERT_ITEMS_PER_PAGE = 6;
+
+function getCertYear(dateStr: string): number {
+  const matches = dateStr.match(/\d{4}/g);
+  if (!matches) return 0;
+  return Math.max(...matches.map((y) => parseInt(y, 10)));
+}
 
 function getPageNumbers(current: number, total: number) {
   if (total <= 7) {
@@ -99,10 +106,68 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState<number>(0);
   const [activeCertCategory, setActiveCertCategory] = useState<string>("All");
+  const [certCurrentPage, setCertCurrentPage] = useState<number>(1);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
   const [selectedGalleryPhoto, setSelectedGalleryPhoto] = useState<string | null>(null);
+  const [galleryDotIndex, setGalleryDotIndex] = useState<number>(0);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+  const galleryCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const galleryRafRef = useRef<number | null>(null);
   const worksSectionRef = useRef<HTMLElement>(null);
+  const GALLERY_DOTS = 5;
+
+  const updateGalleryArc = () => {
+    const container = galleryScrollRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+
+    galleryCardRefs.current.forEach((card) => {
+      if (!card) return;
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = (cardCenter - centerX) / (rect.width / 2);
+      const clamped = Math.max(-1, Math.min(1, distance));
+      const translateY = Math.abs(clamped) * 26;
+      const rotate = clamped * 7;
+      const scale = 1 - Math.abs(clamped) * 0.1;
+      card.style.transform = `translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+      card.style.opacity = String(1 - Math.abs(clamped) * 0.2);
+    });
+  };
+
+  const handleGalleryScroll = () => {
+    const el = galleryScrollRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const ratio = maxScroll > 0 ? el.scrollLeft / maxScroll : 0;
+    const idx = Math.min(
+      GALLERY_DOTS - 1,
+      Math.round(ratio * (GALLERY_DOTS - 1))
+    );
+    setGalleryDotIndex(idx);
+
+    if (galleryRafRef.current) cancelAnimationFrame(galleryRafRef.current);
+    galleryRafRef.current = requestAnimationFrame(updateGalleryArc);
+  };
+
+  const scrollGalleryBy = (direction: "next" | "prev") => {
+    const el = galleryScrollRef.current;
+    if (!el) return;
+
+    const amount = Math.max(el.clientWidth * 0.72, 260);
+    el.scrollBy({
+      left: direction === "next" ? amount : -amount,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    updateGalleryArc();
+    window.addEventListener("resize", updateGalleryArc);
+    return () => window.removeEventListener("resize", updateGalleryArc);
+  }, []);
 
   // Reset gallery slide when project changes
   useEffect(() => {
@@ -145,9 +210,35 @@ export default function Home() {
   );
 
   const filteredCertificates = useMemo(() => {
-    if (activeCertCategory === "All") return certificatesData;
-    return certificatesData.filter((c) => c.category === activeCertCategory);
+    const base =
+      activeCertCategory === "All"
+        ? certificatesData
+        : certificatesData.filter((c) => c.category === activeCertCategory);
+    return [...base].sort((a, b) => getCertYear(b.date) - getCertYear(a.date));
   }, [activeCertCategory]);
+
+  const certTotalPages = Math.max(
+    1,
+    Math.ceil(filteredCertificates.length / CERT_ITEMS_PER_PAGE)
+  );
+
+  const displayedCertificates = useMemo(() => {
+    const startIndex = (certCurrentPage - 1) * CERT_ITEMS_PER_PAGE;
+    return filteredCertificates.slice(startIndex, startIndex + CERT_ITEMS_PER_PAGE);
+  }, [filteredCertificates, certCurrentPage]);
+
+  const handleCertPageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > certTotalPages || newPage === certCurrentPage) return;
+    setCertCurrentPage(newPage);
+    document
+      .getElementById("certificates-section")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleCertCategorySelect = (cat: string) => {
+    setActiveCertCategory(cat);
+    setCertCurrentPage(1);
+  };
 
   // Filter options with item counts
   const categories = useMemo(() => [
@@ -160,10 +251,56 @@ export default function Home() {
       label: "UI/UX Design",
       count: projectsData.filter((p) => p.category === "UI/UX Design").length,
     },
+    {
+      label: "Web Development",
+      count: projectsData.filter((p) => p.category === "Web Development").length,
+    },
   ], []);
 
+  const backgroundExperiences = useMemo(
+    () => [
+      {
+        title: "Gunadarma I/O",
+        role: "Graphic Designer",
+        period: "2025 - 2026",
+        overview:
+          "Crafting high-impact visual communications and digital branding assets to support community initiatives and major tech events.",
+        contributions: [
+          'Spearheaded the visual identity and promotional campaign assets for key initiatives, including "Weekly Class IoT" and "Codefest 4.0".',
+          "Conceptualized and designed official organizational merchandise, aligning with brand guidelines.",
+          "Collaborated closely with cross-functional technical teams to translate complex concepts into engaging visual content.",
+        ],
+      },
+      {
+        title: "Media Mahasiswa Gunadarma",
+        role: "Head of Graphic Design Team",
+        period: "2024 - 2025",
+        overview:
+          "Led the design division in defining, establishing, and scaling the organization's overall visual media identity.",
+        contributions: [
+          "Directed the end-to-end design strategy for internal and external media channels.",
+          "Designed official recruitment campaign materials and organizational collateral, including custom ID cards and lanyards.",
+          "Conceptualized creative social media series (trivia and educational fun facts) to drive student engagement.",
+        ],
+      },
+      {
+        title: "Information Systems Laboratory Gunadarma University",
+        role: "Tutor & Laboratory Assistant",
+        period: "2024 - 2025",
+        overview:
+          "Instructed, mentored, and evaluated university students in core information technology, design software, and programming fundamentals.",
+        contributions: [
+          "Facilitated practical laboratory sessions on Inkscape, Scilab, MySQL, UML, and C Programming.",
+          "Designed self-developed instructional PPT modules and challenge tasks to improve real-time student comprehension.",
+          "Authored official examination materials and assessments to evaluate academic performance.",
+        ],
+      },
+    ],
+    []
+  );
+
   const institutions = useMemo(() => [
-    { label: "All", display: "All Organizations" },
+    { label: "All", display: "All Affiliation" },
     {
       label: "Gunadarma I/O",
       display: "Gunadarma I/O",
@@ -179,6 +316,11 @@ export default function Home() {
       display: "UI/UX Case Study",
       count: projectsData.filter((p) => p.institution === "UI/UX Case Study").length,
     },
+    {
+      label: "Gunadarma University",
+      display: "Gunadarma University",
+      count: projectsData.filter((p) => p.institution === "Gunadarma University").length,
+    },
   ], []);
 
   const handleCategorySelect = (cat: string) => {
@@ -192,10 +334,23 @@ export default function Home() {
     ) {
       setActiveInstitution("All");
     }
-    // If switching to UI/UX Design, reset institution if it was a Graphic Design-only filter
+    // Reset institution filters that do not belong to the selected category
     if (
       cat === "UI/UX Design" &&
-      (activeInstitution === "Gunadarma I/O" || activeInstitution === "Media Mahasiswa Gunadarma")
+      (activeInstitution === "Gunadarma I/O" || activeInstitution === "Media Mahasiswa Gunadarma" || activeInstitution === "Academic Project")
+    ) {
+      setActiveInstitution("All");
+    }
+    if (
+      cat === "Graphic Design" &&
+      activeInstitution === "Academic Project"
+    ) {
+      setActiveInstitution("All");
+    }
+    if (
+      cat === "Web Development" &&
+      activeInstitution !== "All" &&
+      activeInstitution !== "Academic Project"
     ) {
       setActiveInstitution("All");
     }
@@ -216,6 +371,10 @@ export default function Home() {
       if (activeCategory === "Graphic Design") {
         setActiveCategory("UI/UX Design");
       }
+    }
+    // Sync category when selecting the thesis / academic project
+    if (inst === "Academic Project") {
+      setActiveCategory("Web Development");
     }
   };
 
@@ -456,7 +615,7 @@ export default function Home() {
                 </h3>
               </div>
               <p className="text-sm sm:text-base text-ink/70 dark:text-white/70 mt-1 font-medium">
-                Moments, milestones, and behind-the-scenes memories (hover to pause, click to enlarge)
+                Moments, milestones, and behind-the-scenes memories (swipe to explore, click to enlarge)
               </p>
             </div>
             <div className="text-xs font-semibold px-3 py-1 rounded-full bg-pink/10 text-pink border border-pink/20 w-fit self-start sm:self-auto">
@@ -464,76 +623,115 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Marquee Wrapper with soft fade masks on edges */}
-          <div className="relative w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
-            <div className="animate-marquee-slow motion-reduce:animate-none hover:[animation-play-state:paused] flex gap-5 md:gap-6 py-2">
+          {/* Curved horizontal gallery — drag/swipe + arrow navigation */}
+          <div className="relative group/gallery">
+            {/* Previous arrow */}
+            <button
+              type="button"
+              onClick={() => scrollGalleryBy("prev")}
+              aria-label="Previous gallery items"
+              className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:bg-pink hover:text-white hover:border-pink hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            <div
+              ref={galleryScrollRef}
+              onScroll={handleGalleryScroll}
+              className="flex gap-4 sm:gap-5 overflow-x-auto overflow-y-hidden px-12 sm:px-14 pt-7 pb-7 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none"
+              style={{ perspective: "1000px", touchAction: "pan-y" }}
+            >
               {[
-                { src: "/gallery/Awarding 1st Winner.JPG", caption: "Awarding 1st Winner", tag: "Achievement" },
-                { src: "/gallery/Celebrating unoficially graduate (1).jpg", caption: "Celebrating Graduation", tag: "Milestone" },
-                { src: "/gallery/Celebrating unoficially graduate (2).jpg", caption: "Celebrating Graduation", tag: "Milestone" },
-                { src: "/gallery/Faculty PKKMB Committee.jpeg", caption: "Faculty PKKMB Committee", tag: "Leadership" },
-                { src: "/gallery/Faculty PKKMB Committee.JPG", caption: "Faculty PKKMB Committee", tag: "Leadership" },
-                { src: "/gallery/Final Competition UIUX GDGoC Gunadarma.JPG", caption: "Final Competition GDGoC", tag: "Achievement" },
-                { src: "/gallery/Graphic Design Team.JPG", caption: "Graphic Design Team", tag: "Organization" },
-                { src: "/gallery/Gunadarma Code Week 2 (1).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (2).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (3).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (4).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/information systems laboratory (1).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/information systems laboratory (2).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/information systems laboratory (3).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/Moderator at InfoSession Gunadarma IO (1).JPG", caption: "Moderator at InfoSession", tag: "Leadership" },
-                { src: "/gallery/Moderator at InfoSession Gunadarma IO (2).JPG", caption: "Moderator at InfoSession", tag: "Leadership" },
-                // Duplicate items for continuous smooth looping
-                { src: "/gallery/Awarding 1st Winner.JPG", caption: "Awarding 1st Winner", tag: "Achievement" },
-                { src: "/gallery/Celebrating unoficially graduate (1).jpg", caption: "Celebrating Graduation", tag: "Milestone" },
-                { src: "/gallery/Celebrating unoficially graduate (2).jpg", caption: "Celebrating Graduation", tag: "Milestone" },
-                { src: "/gallery/Faculty PKKMB Committee.jpeg", caption: "Faculty PKKMB Committee", tag: "Leadership" },
-                { src: "/gallery/Faculty PKKMB Committee.JPG", caption: "Faculty PKKMB Committee", tag: "Leadership" },
-                { src: "/gallery/Final Competition UIUX GDGoC Gunadarma.JPG", caption: "Final Competition GDGoC", tag: "Achievement" },
-                { src: "/gallery/Graphic Design Team.JPG", caption: "Graphic Design Team", tag: "Organization" },
-                { src: "/gallery/Gunadarma Code Week 2 (1).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (2).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (3).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/Gunadarma Code Week 2 (4).jpeg", caption: "Gunadarma Code Week 2", tag: "Activity" },
-                { src: "/gallery/information systems laboratory (1).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/information systems laboratory (2).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/information systems laboratory (3).jpg", caption: "Information Systems Laboratory", tag: "Campus Life" },
-                { src: "/gallery/Moderator at InfoSession Gunadarma IO (1).JPG", caption: "Moderator at InfoSession", tag: "Leadership" },
-                { src: "/gallery/Moderator at InfoSession Gunadarma IO (2).JPG", caption: "Moderator at InfoSession", tag: "Leadership" },
+                { src: "/gallery/Awarding 1st Winner.JPG", caption: "Awarding 1st Winner" },
+                { src: "/gallery/Celebrating unoficially graduate (1).jpg", caption: "Celebrating Graduation" },
+                { src: "/gallery/Celebrating unoficially graduate (2).jpg", caption: "Celebrating Graduation" },
+                { src: "/gallery/Faculty PKKMB Committee.jpeg", caption: "Faculty PKKMB Committee" },
+                { src: "/gallery/Faculty PKKMB Committee.JPG", caption: "Faculty PKKMB Committee" },
+                { src: "/gallery/Final Competition UIUX GDGoC Gunadarma.JPG", caption: "Final Competition GDGoC" },
+                { src: "/gallery/Graphic Design Team.JPG", caption: "Graphic Design Team" },
+                { src: "/gallery/Gunadarma Code Week 2 (1).jpeg", caption: "Gunadarma Code Week 2" },
+                { src: "/gallery/Gunadarma Code Week 2 (2).jpeg", caption: "Gunadarma Code Week 2" },
+                { src: "/gallery/Gunadarma Code Week 2 (3).jpeg", caption: "Gunadarma Code Week 2" },
+                { src: "/gallery/Gunadarma Code Week 2 (4).jpeg", caption: "Gunadarma Code Week 2" },
+                { src: "/gallery/information systems laboratory (1).jpg", caption: "Information Systems Laboratory" },
+                { src: "/gallery/information systems laboratory (2).jpg", caption: "Information Systems Laboratory" },
+                { src: "/gallery/information systems laboratory (3).jpg", caption: "Information Systems Laboratory" },
+                { src: "/gallery/Moderator at InfoSession Gunadarma IO (1).JPG", caption: "Moderator at InfoSession" },
+                { src: "/gallery/Moderator at InfoSession Gunadarma IO (2).JPG", caption: "Moderator at InfoSession" },
               ].map((photo, i) => (
                 <div
                   key={i}
-                  onClick={() => setSelectedGalleryPhoto(photo.src)}
-                  className="group relative flex-shrink-0 w-[240px] sm:w-[280px] md:w-[310px] h-[340px] sm:h-[380px] md:h-[420px] rounded-[28px] overflow-hidden cursor-pointer shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:shadow-2xl hover:shadow-pink/20 ring-1 ring-black/10 dark:ring-white/15 hover:ring-pink/50 bg-plum/5 dark:bg-white/5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  ref={(el) => {
+                    galleryCardRefs.current[i] = el;
+                  }}
+                  className="group flex-shrink-0 w-[140px] sm:w-[160px] md:w-[178px] snap-start transition-transform duration-300 ease-out will-change-transform"
                 >
-                  <Image
-                    src={photo.src}
-                    alt={photo.caption}
-                    fill
-                    sizes="(max-width: 768px) 280px, 310px"
-                    className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.12] motion-reduce:transition-none"
-                  />
-
-                  {/* Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-black/0 transition-all duration-500 group-hover:from-black/95" />
-
-                  {/* Frosted info panel */}
-                  <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-black/35 backdrop-blur-md border border-white/10 p-4 translate-y-1.5 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                    <h4 className="text-white font-bold text-base sm:text-lg leading-snug drop-shadow-sm">
-                      {photo.caption}
-                    </h4>
-                    <span className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-white/15 group-hover:bg-pink px-2.5 py-1.5 rounded-full border border-white/20 group-hover:border-pink transition-colors duration-500">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
-                        <circle cx="12" cy="12" r="3" />
-                      </svg>
-                      Lihat Foto
-                    </span>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedGalleryPhoto(photo.src)}
+                    className="relative block w-full aspect-square rounded-2xl overflow-hidden bg-plum/5 dark:bg-white/5 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:shadow-xl group-hover:shadow-pink/20 group-hover:ring-pink/40 group-hover:-translate-y-1"
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.caption}
+                      fill
+                      draggable={false}
+                      sizes="(max-width: 768px) 160px, 178px"
+                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    />
+                  </button>
+                  <p className="mt-2 text-sm sm:text-base font-semibold text-ink dark:text-white truncate">
+                    {photo.caption}
+                  </p>
                 </div>
               ))}
             </div>
+
+            {/* Next arrow */}
+            <button
+              type="button"
+              onClick={() => scrollGalleryBy("next")}
+              aria-label="Next gallery items"
+              className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:bg-pink hover:text-white hover:border-pink hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Pagination bullets */}
+          <div className="flex items-center justify-center gap-2 mt-4">
+            {Array.from({ length: GALLERY_DOTS }).map((_, i) => (
+              <span
+                key={i}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === galleryDotIndex
+                    ? "w-5 bg-pink"
+                    : "w-1.5 bg-ink/20 dark:bg-white/20"
+                }`}
+              />
+            ))}
           </div>
         </Reveal>
       </section>
@@ -556,46 +754,57 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-6 md:mt-8 space-y-10 md:space-y-14">
-          <Reveal variant="up" delay={60}>
-            <ExperienceItem
-              title="Gunadarma I/O"
-              role="Graphic Designer"
-              period="2025 - 2026"
-              overview="Crafting high-impact visual communications and digital branding assets to support community initiatives and major tech events."
-              contributions={[
-                'Spearheaded the visual identity and promotional campaign assets for key initiatives, including "Weekly Class IoT" and "Codefest 4.0".',
-                "Conceptualized and designed official organizational merchandise, aligning with brand guidelines.",
-                "Collaborated closely with cross-functional technical teams to translate complex concepts into engaging visual content.",
-              ]}
-            />
-          </Reveal>
-          <Reveal variant="up" delay={100}>
-            <ExperienceItem
-              title="Media Mahasiswa Gunadarma"
-              role="Head of Graphic Design Team"
-              period="2024 - 2025"
-              overview="Led the design division in defining, establishing, and scaling the organization's overall visual media identity."
-              contributions={[
-                "Directed the end-to-end design strategy for internal and external media channels.",
-                "Designed official recruitment campaign materials and organizational collateral, including custom ID cards and lanyards.",
-                "Conceptualized creative social media series (trivia and educational fun facts) to drive student engagement.",
-              ]}
-            />
-          </Reveal>
-          <Reveal variant="up" delay={140}>
-            <ExperienceItem
-              title="Information Systems Laboratory Gunadarma University"
-              role="Tutor & Laboratory Assistant"
-              period="2024 - 2025"
-              overview="Instructed, mentored, and evaluated university students in core information technology, design software, and programming fundamentals."
-              contributions={[
-                "Facilitated practical laboratory sessions on Inkscape, Scilab, MySQL, UML, and C Programming.",
-                "Designed self-developed instructional PPT modules and challenge tasks to improve real-time student comprehension.",
-                "Authored official examination materials and assessments to evaluate academic performance.",
-              ]}
-            />
-          </Reveal>
+        <div className="mt-14 md:mt-20 relative">
+          {/* Timeline spine — left-aligned on mobile, centered on desktop */}
+          <div className="absolute left-[9px] sm:left-[11px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-pink via-magenta/50 to-pink/10 dark:from-pink dark:via-magenta/40 dark:to-pink/5" />
+
+          <div className="space-y-16 md:space-y-8">
+            {backgroundExperiences.map((exp, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <Reveal key={exp.title} variant="up" delay={60 + i * 40}>
+                  <div className="relative md:grid md:grid-cols-2 md:gap-x-10 lg:gap-x-16 md:py-8">
+                    {/* Timeline node, centered on the spine */}
+                    <span className="absolute left-[10px] sm:left-[12px] md:left-1/2 top-1.5 md:top-9 -translate-x-1/2 z-10 flex items-center justify-center w-4 h-4 sm:w-[18px] sm:h-[18px] rounded-full bg-gradient-to-br from-pink to-magenta ring-[5px] ring-white dark:ring-ink shadow-md shrink-0" />
+
+                    {/* Period pill — sits on the "empty" side, opposite the card, desktop only */}
+                    <div
+                      className={`hidden md:flex ${
+                        isEven ? "order-1 justify-end pr-10 lg:pr-16" : "order-2 justify-start pl-10 lg:pl-16"
+                      } items-start pt-6`}
+                    >
+                      <span className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-sm lg:text-base font-bold shadow-md whitespace-nowrap">
+                        {exp.period}
+                      </span>
+                    </div>
+
+                    {/* Content card */}
+                    <div
+                      className={`${
+                        isEven ? "order-2" : "order-1"
+                      } pl-9 sm:pl-12 md:pl-0 ${isEven ? "md:pl-10 lg:pl-16" : "md:pr-10 lg:pr-16"}`}
+                    >
+                      {/* Mobile-only pill above the card */}
+                      <span className="md:hidden inline-flex items-center px-4 py-1.5 mb-3 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs sm:text-sm font-bold shadow-md">
+                        {exp.period}
+                      </span>
+
+                      <div className="rounded-2xl md:rounded-3xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1">
+                        <ExperienceItem
+                          title={exp.title}
+                          role={exp.role}
+                          period={exp.period}
+                          overview={exp.overview}
+                          contributions={exp.contributions}
+                          hidePeriod
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -649,9 +858,6 @@ export default function Home() {
                   <ul className="list-disc ml-12 md:ml-16 mt-2 space-y-1.5 text-xl sm:text-2xl md:text-[26px] lg:text-[29px]">
                     <li>
                       1st Place Winner — UI/UX Competition by Google Developer Groups on Campus (GDGoC) Gunadarma (2025).
-                    </li>
-                    <li>
-                      Appointed as Laboratory Tutor &amp; Assistant at Information Systems Laboratory.
                     </li>
                   </ul>
                 </div>
@@ -746,7 +952,7 @@ export default function Home() {
             {/* Secondary Filter: Institution Chips */}
             <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#31081F]/10 dark:border-white/10">
               <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-pink mr-1 select-none">
-                Organization:
+                AFFILIATION:
               </span>
               {institutions.map((inst) => {
                 const isSelected = activeInstitution === inst.label;
@@ -892,6 +1098,27 @@ export default function Home() {
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
                           </span>
                         )}
+                        {project.links.live && (
+                          <span
+                            title="Live website available"
+                            className="hover:text-pink transition-colors"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <line x1="2" y1="12" x2="22" y2="12" />
+                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>
@@ -998,6 +1225,7 @@ export default function Home() {
         )}
 
         {/* CERTIFICATES & LICENSES */}
+        <div id="certificates-section" />
         <Reveal variant="up" className="mt-24 md:mt-32">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -1018,11 +1246,13 @@ export default function Home() {
         <Reveal variant="fade" delay={60}>
           <div className="flex flex-wrap gap-2.5 sm:gap-3.5 mt-8 md:mt-10">
             {certCategories.map((cat) => {
+
+
               const isSelected = activeCertCategory === cat.label;
               return (
                 <button
                   key={cat.label}
-                  onClick={() => setActiveCertCategory(cat.label)}
+                  onClick={() => handleCertCategorySelect(cat.label)}
                   className={`group px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-normal transition-all cursor-pointer flex items-center gap-2 ${isSelected
                     ? "bg-pink text-white shadow-md ring-2 ring-pink/30"
                     : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
@@ -1045,7 +1275,7 @@ export default function Home() {
 
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-8 md:mt-10">
-          {filteredCertificates.map((cert, index) => {
+          {displayedCertificates.map((cert, index) => {
             const isGunadarma = cert.category === "Gunadarma";
             const isLPK = cert.category === "LPK";
 
@@ -1188,6 +1418,102 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* Certificates Pagination Controls */}
+        {certTotalPages > 1 && (
+          <Reveal variant="fade" delay={80}>
+            <nav
+              className="flex items-center justify-center gap-2 sm:gap-3 mt-12 md:mt-16 select-none"
+              aria-label="Certificates pagination"
+            >
+              {/* Prev Button */}
+              <button
+                onClick={() => handleCertPageChange(certCurrentPage - 1)}
+                disabled={certCurrentPage === 1}
+                aria-label="Previous page"
+                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === 1
+                  ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  }`}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-transform group-hover:-translate-x-0.5"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                <span className="hidden sm:inline">Prev</span>
+              </button>
+
+              {/* Page Number Buttons */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                {getPageNumbers(certCurrentPage, certTotalPages).map((page, idx) => {
+                  if (page === "...") {
+                    return (
+                      <span
+                        key={`cert-ellipsis-${idx}`}
+                        className="w-7 h-9 sm:w-9 sm:h-11 flex items-center justify-center text-ink/40 dark:text-white/40 font-bold text-xs sm:text-sm select-none"
+                      >
+                        …
+                      </span>
+                    );
+                  }
+
+                  const pageNum = Number(page);
+                  const isActive = certCurrentPage === pageNum;
+
+                  return (
+                    <button
+                      key={`cert-page-${pageNum}`}
+                      onClick={() => handleCertPageChange(pageNum)}
+                      aria-current={isActive ? "page" : undefined}
+                      aria-label={`Page ${pageNum}`}
+                      className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
+                        ? "bg-pink text-white shadow-md shadow-pink/30 ring-2 ring-pink/20 scale-105"
+                        : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white hover:scale-105 active:scale-95"
+                        }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={() => handleCertPageChange(certCurrentPage + 1)}
+                disabled={certCurrentPage === certTotalPages}
+                aria-label="Next page"
+                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === certTotalPages
+                  ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  }`}
+              >
+                <span className="hidden sm:inline">Next</span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-transform group-hover:translate-x-0.5"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </nav>
+          </Reveal>
+        )}
       </section>
 
       {/* LET'S CONNECT / CONTACT */}
@@ -1649,23 +1975,31 @@ function ExperienceItem({
   period,
   overview,
   contributions,
+  hidePeriod = false,
 }: {
   title: string;
   role: string;
   period: string;
   overview: string;
   contributions: string[];
+  hidePeriod?: boolean;
 }) {
   return (
     <div>
       <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white">
         {title} <span className="text-pink font-bold">| {role}</span>
       </h3>
-      <p className="text-lg sm:text-xl md:text-2xl font-bold text-ink/80 dark:text-white/80 mt-1 mb-4">
-        {period}
-      </p>
+      {!hidePeriod && (
+        <p className="text-lg sm:text-xl md:text-2xl font-bold text-ink/80 dark:text-white/80 mt-1 mb-4">
+          {period}
+        </p>
+      )}
 
-      <div className="space-y-3 md:space-y-4 text-xl sm:text-2xl md:text-[26px] lg:text-[29px] text-ink/90 dark:text-white/90 leading-relaxed">
+      <div
+        className={`space-y-3 md:space-y-4 text-xl sm:text-2xl md:text-[26px] lg:text-[29px] text-ink/90 dark:text-white/90 leading-relaxed ${
+          hidePeriod ? "mt-3 md:mt-4" : ""
+        }`}
+      >
         <div className="flex items-start gap-3">
           <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
           <p>
