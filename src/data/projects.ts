@@ -15,7 +15,7 @@ export interface ProjectItem {
   id: string;
   title: string;
   category: "Graphic Design" | "UI/UX Design" | "Web Development";
-  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study";
+  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University";
   tag: string;
   image: string;
   width: number;
