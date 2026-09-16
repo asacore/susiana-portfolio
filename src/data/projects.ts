@@ -10,6 +10,7 @@ export interface ProjectLinks {
   github?: string;     // Link GitHub repository
   live?: string;       // Link Live Website / Demo
   guidebook?: string;  // Link PDF Guidebook / dokumen panduan
+  handbook?: string;   // Link PDF Handbook / dokumen panduan
 }
 
 export interface ProjectItem {
