@@ -59,6 +59,9 @@ export const projectsData: ProjectItem[] = [
     width: 1080,
     height: 1440,
     featured: true,
+    links: {
+      handbook: "/project gcw 4.0/HC - Handbook.pdf",
+    },
   },
   {
     id: "gcw-hc-guidebook",
