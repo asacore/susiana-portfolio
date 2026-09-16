@@ -9,13 +9,14 @@ export interface ProjectLinks {
   prototype?: string;  // Link Figma Prototype / Canvas
   github?: string;     // Link GitHub repository
   live?: string;       // Link Live Website / Demo
+  guidebook?: string;  // Link PDF Guidebook / dokumen panduan
 }
 
 export interface ProjectItem {
   id: string;
   title: string;
   category: "Graphic Design" | "UI/UX Design" | "Web Development";
-  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University";
+  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University" | "Gunadarma Code Week 4.0";
   tag: string;
   image: string;
   width: number;
@@ -30,6 +31,48 @@ export interface ProjectItem {
 }
 
 export const projectsData: ProjectItem[] = [
+
+  /* ══════════════════════════════════════════════════════════════════
+     GUNADARMA CODE WEEK 4.0 (Graphic Design)
+     ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "gcw-coming-soon",
+    title: "Gunadarma Code Week 4.0 — Coming Soon",
+    category: "Graphic Design",
+    institution: "Gunadarma Code Week 4.0",
+    tag: "Key Visual & Announcement",
+    image: "/project gcw 4.0/COMING SOON GCW.png",
+    width: 1080,
+    height: 1440,
+    featured: true,
+    links: {
+      instagram: "https://www.instagram.com/p/DWlG2a7knTJ/?stkn=eWVwYWtxZmxjaHZk",
+    }
+  },
+  {
+    id: "gcw-hc-handbook",
+    title: "HC Handbook — Gunadarma Code Week 4.0",
+    category: "Graphic Design",
+    institution: "Gunadarma Code Week 4.0",
+    tag: "Handbook Design",
+    image: "/project gcw 4.0/HC - Handbook cover.png",
+    width: 1080,
+    height: 1440,
+    featured: true,
+  },
+  {
+    id: "gcw-hc-guidebook",
+    title: "HC Guidebook — Gunadarma Code Week 4.0",
+    category: "Graphic Design",
+    institution: "Gunadarma Code Week 4.0",
+    tag: "Guidebook Design",
+    image: "/project gcw 4.0/HC - Guidebook cover.png",
+    width: 1080,
+    height: 1440,
+    links: {
+      guidebook: "/project gcw 4.0/HC - Guidebook.pdf",
+    },
+  },
 
   /* ══════════════════════════════════════════════════════════════════
      WEB DEVELOPMENT (Academic / Thesis Project)
@@ -117,15 +160,63 @@ export const projectsData: ProjectItem[] = [
     featured: true,
   },
   {
-    id: "uiux-notes",
-    title: "Minimalist Notes & Productivity App",
-    category: "UI/UX Design",
+    id: "web-notes",
+    title: "NOTICE! — Minimalist Note-Taking Web App",
+    category: "Web Development",
     institution: "Gunadarma University",
-    tag: "Productivity App UI",
-    image: "/uiux/notes.png",
+    tag: "Productivity App",
+    image: "/project web/notice!.png",
     width: 10272,
     height: 9372,
     featured: true,
+    links: {
+      github: "https://github.com/asacore/web-notes",
+    },
+  },
+  {
+    id: "web-yursayur",
+    title: "Yur Sayur! — Vegetable Marketplace Website",
+    category: "Web Development",
+    institution: "Gunadarma University",
+    tag: "Group Project",
+    image: "/project web/yur-sayur.png",
+    width: 1920,
+    height: 1080,
+    group: "Group Project",
+    groupDescription: "Built as a group assignment; my role was the programmer.",
+    links: {
+      github: "https://github.com/asacore/yur-sayur",
+    },
+  },
+  {
+    id: "web-spskenanga",
+    title: "SPS Kenanga — Kindergarten School Website",
+    category: "Web Development",
+    institution: "Gunadarma University",
+    tag: "Group Project",
+    image: "/project web/sps-kenanga.png",
+    width: 1920,
+    height: 1080,
+    group: "Group Project",
+    groupDescription: "Final project for a course, built in a group; my role was the programmer.",
+    links: {
+      github: "https://github.com/asacore/sps-kenanga",
+    },
+  },
+  {
+    id: "web-inventaris",
+    title: "Sistem Inventaris — CodeIgniter 4 Inventory Management",
+    category: "Web Development",
+    institution: "Gunadarma University",
+    tag: "LSP Certification Project",
+    image: "/project web/inventaris.png",
+    width: 1920,
+    height: 1080,
+    description:
+      "An inventory management web application built with CodeIgniter 4, developed as a project for LSP (Lembaga Sertifikasi Profesi) certification.",
+    links: {
+      github: "https://github.com/asacore/inventaris-ci4",
+    },
   },
   {
     id: "uiux-home-dashboard",

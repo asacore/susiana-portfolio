@@ -322,38 +322,26 @@ export default function Home() {
       display: "Gunadarma University",
       count: projectsData.filter((p) => p.institution === "Gunadarma University").length,
     },
+    {
+      label: "Gunadarma Code Week 4.0",
+      display: "Gunadarma Code Week 4.0",
+      count: projectsData.filter((p) => p.institution === "Gunadarma Code Week 4.0").length,
+    },
   ], []);
 
   const handleCategorySelect = (cat: string) => {
     setActiveCategory(cat);
     setCurrentPage(1);
 
-    // If switching to Graphic Design, reset institution if it was a UI/UX-only filter
-    if (
-      cat === "Graphic Design" &&
-      (activeInstitution === "GDGoC Gunadarma" || activeInstitution === "UI/UX Case Study")
-    ) {
-      setActiveInstitution("All");
-    }
-    // Reset institution filters that do not belong to the selected category
-    if (
-      cat === "UI/UX Design" &&
-      (activeInstitution === "Gunadarma I/O" || activeInstitution === "Media Mahasiswa Gunadarma" || activeInstitution === "Academic Project")
-    ) {
-      setActiveInstitution("All");
-    }
-    if (
-      cat === "Graphic Design" &&
-      activeInstitution === "Academic Project"
-    ) {
-      setActiveInstitution("All");
-    }
-    if (
-      cat === "Web Development" &&
-      activeInstitution !== "All" &&
-      activeInstitution !== "Academic Project"
-    ) {
-      setActiveInstitution("All");
+    // If the currently active institution has no projects in the newly
+    // selected category, reset it back to "All" instead of showing 0 results.
+    if (activeInstitution !== "All") {
+      const hasMatch = projectsData.some(
+        (p) => p.institution === activeInstitution && (cat === "All Works" || p.category === cat)
+      );
+      if (!hasMatch) {
+        setActiveInstitution("All");
+      }
     }
   };
 
@@ -361,21 +349,17 @@ export default function Home() {
     setActiveInstitution(inst);
     setCurrentPage(1);
 
-    // Sync category when selecting Graphic Design-only institutions
-    if (inst === "Gunadarma I/O" || inst === "Media Mahasiswa Gunadarma") {
-      if (activeCategory === "UI/UX Design") {
-        setActiveCategory("Graphic Design");
+    // If the currently active category has no projects for the newly
+    // selected institution, switch to a category that institution actually has.
+    if (inst !== "All" && activeCategory !== "All Works") {
+      const hasMatch = projectsData.some(
+        (p) => p.institution === inst && p.category === activeCategory
+      );
+      if (!hasMatch) {
+        const fallbackCategory =
+          projectsData.find((p) => p.institution === inst)?.category ?? "All Works";
+        setActiveCategory(fallbackCategory);
       }
-    }
-    // Sync category when selecting UI/UX-only institutions
-    if (inst === "GDGoC Gunadarma" || inst === "UI/UX Case Study") {
-      if (activeCategory === "Graphic Design") {
-        setActiveCategory("UI/UX Design");
-      }
-    }
-    // Sync category when selecting the thesis / academic project
-    if (inst === "Academic Project") {
-      setActiveCategory("Web Development");
     }
   };
 
@@ -1093,35 +1077,19 @@ export default function Home() {
                 onClick={() => setSelectedProject(project)}
                 className="group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
               >
-                {/* Image Container with Zoom Overlay */}
-                <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden flex items-center justify-center p-3 border-b border-[#31081F]/5 dark:border-white/5">
-                  <Image
+        
+                {/* Image Container */}
+                <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-4 sm:p-5">
+                  <img
                     src={project.image}
                     alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
+                    className="block w-full h-full object-contain object-center scale-[1.12] transition-transform duration-500 ease-out group-hover:scale-[1.18] select-none"
                   />
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/40 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                  <div className="absolute inset-0 z-10 bg-black/40 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                     <span className="px-4 py-2 rounded-full bg-white text-ink text-xs sm:text-sm font-bold shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2">
                       <span>Preview Project</span>
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        <line x1="11" y1="8" x2="11" y2="14"></line>
-                        <line x1="8" y1="11" x2="14" y2="11"></line>
-                      </svg>
                     </span>
                   </div>
                 </div>
@@ -1993,6 +1961,19 @@ export default function Home() {
                       {/* Globe icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
                       <span>Live Site</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                    </a>
+                  )}
+                  {selectedProject.links.guidebook && (
+                    <a
+                      href={selectedProject.links.guidebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                    >
+                      {/* PDF / Document icon */}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                      <span>Guidebook</span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
                     </a>
                   )}
