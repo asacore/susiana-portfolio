@@ -671,7 +671,7 @@ export default function Home() {
                 </h3>
               </div>
               <p className="text-sm sm:text-base text-ink/70 dark:text-white/70 mt-1 font-medium">
-                Moments, milestones, and behind-the-scenes memories (swipe to explore, click to enlarge)
+                Moments, milestones, and behind-the-scenes memories (use the arrows to explore, click to enlarge)
               </p>
             </div>
             <div className="text-xs font-semibold px-3 py-1 rounded-full bg-pink/10 text-pink border border-pink/20 w-fit self-start sm:self-auto">
@@ -1156,6 +1156,28 @@ export default function Home() {
                               <circle cx="12" cy="12" r="10" />
                               <line x1="2" y1="12" x2="22" y2="12" />
                               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                          </span>
+                        )}
+                        {project.links.handbook && (
+                          <span
+                            title="Handbook / PDF available"
+                            className="hover:text-pink transition-colors"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="9" y1="13" x2="15" y2="13" />
+                              <line x1="9" y1="17" x2="15" y2="17" />
                             </svg>
                           </span>
                         )}
@@ -1983,6 +2005,19 @@ export default function Home() {
                       {/* Globe icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
                       <span>Live Site</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                    </a>
+                  )}
+                  {selectedProject.links.handbook && (
+                    <a
+                      href={selectedProject.links.handbook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                    >
+                      {/* PDF / Document icon */}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                      <span>Handbook</span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
                     </a>
                   )}

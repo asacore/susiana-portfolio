@@ -59,6 +59,7 @@ export const projectsData: ProjectItem[] = [
     image: "/project gcw 4.0/HC - Handbook cover.png",
     width: 1080,
     height: 1440,
+    featured: true,
     links: {
       handbook: "/project gcw 4.0/HC - Handbook.pdf",
     },
