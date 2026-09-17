@@ -496,19 +496,16 @@ export default function Home() {
             >
               <span className="relative flex flex-col items-center justify-center w-[18px] h-[13px]">
                 <span
-                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    mobileMenuOpen ? "rotate-45 top-1/2 -translate-y-1/2" : "top-0"
-                  }`}
+                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileMenuOpen ? "rotate-45 top-1/2 -translate-y-1/2" : "top-0"
+                    }`}
                 />
                 <span
-                  className={`absolute h-[2px] bg-current rounded-full transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] top-1/2 -translate-y-1/2 ${
-                    mobileMenuOpen ? "w-0 opacity-0" : "w-full opacity-100"
-                  }`}
+                  className={`absolute h-[2px] bg-current rounded-full transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] top-1/2 -translate-y-1/2 ${mobileMenuOpen ? "w-0 opacity-0" : "w-full opacity-100"
+                    }`}
                 />
                 <span
-                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    mobileMenuOpen ? "-rotate-45 top-1/2 -translate-y-1/2" : "bottom-0"
-                  }`}
+                  className={`absolute h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileMenuOpen ? "-rotate-45 top-1/2 -translate-y-1/2" : "bottom-0"
+                    }`}
                 />
               </span>
             </button>
@@ -519,9 +516,8 @@ export default function Home() {
 
         {/* Mobile dropdown menu — links + Connect CTA, shown below the bar */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] border-t border-[#31081F]/10 dark:border-[#31081F]/30 bg-white/98 dark:bg-ink/98 backdrop-blur-md ${
-            mobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-t-0"
-          }`}
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] border-t border-[#31081F]/10 dark:border-[#31081F]/30 bg-white/98 dark:bg-ink/98 backdrop-blur-md ${mobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-t-0"
+            }`}
         >
           <div className="px-4 sm:px-8 py-4 flex flex-col gap-4 text-[17px] font-normal">
             <a
@@ -781,11 +777,10 @@ export default function Home() {
             {Array.from({ length: GALLERY_DOTS }).map((_, i) => (
               <span
                 key={i}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === galleryDotIndex
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === galleryDotIndex
                     ? "w-5 bg-pink"
                     : "w-1.5 bg-ink/20 dark:bg-white/20"
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -821,31 +816,29 @@ export default function Home() {
                 <Reveal key={exp.title} variant="up" delay={60 + i * 40}>
                   <div className="relative md:grid md:grid-cols-2 md:gap-x-10 lg:gap-x-16 md:py-8">
                     {/* Timeline node, centered on the spine */}
-                    <span className="absolute left-[10px] sm:left-[12px] md:left-1/2 top-1.5 md:top-9 -translate-x-1/2 z-10 flex items-center justify-center w-4 h-4 sm:w-[18px] sm:h-[18px] rounded-full bg-gradient-to-br from-pink to-magenta ring-[5px] ring-white dark:ring-ink shadow-md shrink-0" />
+                    <span className="absolute left-[10px] sm:left-[12px] md:left-1/2 top-1.5 md:top-7 -translate-x-1/2 z-10 flex items-center justify-center w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-pink to-magenta ring-4 ring-white dark:ring-ink shadow-md shrink-0" />
 
                     {/* Period pill — sits on the "empty" side, opposite the card, desktop only */}
                     <div
-                      className={`hidden md:flex ${
-                        isEven ? "order-1 justify-end pr-10 lg:pr-16" : "order-2 justify-start pl-10 lg:pl-16"
-                      } items-start pt-6`}
+                      className={`hidden md:flex ${isEven ? "order-1 justify-end pr-10 lg:pr-16" : "order-2 justify-start pl-10 lg:pl-16"
+                        } items-start pt-6`}
                     >
-                      <span className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-sm lg:text-base font-bold shadow-md whitespace-nowrap">
+                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs lg:text-sm font-bold shadow-md whitespace-nowrap">
                         {exp.period}
                       </span>
                     </div>
 
                     {/* Content card */}
                     <div
-                      className={`${
-                        isEven ? "order-2" : "order-1"
-                      } pl-9 sm:pl-12 md:pl-0 ${isEven ? "md:pl-10 lg:pl-16" : "md:pr-10 lg:pr-16"}`}
+                      className={`${isEven ? "order-2" : "order-1"
+                        } pl-9 sm:pl-12 md:pl-0 ${isEven ? "md:pl-10 lg:pl-16" : "md:pr-10 lg:pr-16"}`}
                     >
                       {/* Mobile-only pill above the card */}
-                      <span className="md:hidden inline-flex items-center px-4 py-1.5 mb-3 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs sm:text-sm font-bold shadow-md">
+                      <span className="md:hidden inline-flex items-center px-3 py-1 mb-2 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs font-bold shadow-md">
                         {exp.period}
                       </span>
 
-                      <div className="rounded-2xl md:rounded-3xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-5 sm:p-6 md:p-8 transition-all duration-300 hover:-translate-y-1">
+                      <div className="rounded-2xl md:rounded-3xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-4 sm:p-5 md:p-6 transition-all duration-300 hover:-translate-y-1">
                         <ExperienceItem
                           title={exp.title}
                           role={exp.role}
@@ -1077,7 +1070,7 @@ export default function Home() {
                 onClick={() => setSelectedProject(project)}
                 className="group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
               >
-        
+
                 {/* Image Container */}
                 <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-4 sm:p-5">
                   <img
@@ -2096,22 +2089,21 @@ function ExperienceItem({
 }) {
   return (
     <div>
-      <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white">
+      <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-ink dark:text-white">
         {title} <span className="text-pink font-bold">| {role}</span>
       </h3>
       {!hidePeriod && (
-        <p className="text-lg sm:text-xl md:text-2xl font-bold text-ink/80 dark:text-white/80 mt-1 mb-4">
+        <p className="text-sm sm:text-base md:text-lg font-bold text-ink/80 dark:text-white/80 mt-1 mb-3">
           {period}
         </p>
       )}
 
       <div
-        className={`space-y-3 md:space-y-4 text-xl sm:text-2xl md:text-[26px] lg:text-[29px] text-ink/90 dark:text-white/90 leading-relaxed ${
-          hidePeriod ? "mt-3 md:mt-4" : ""
-        }`}
+        className={`space-y-2 md:space-y-3 text-sm sm:text-base md:text-lg text-ink/90 dark:text-white/90 leading-relaxed ${hidePeriod ? "mt-2 md:mt-3" : ""
+          }`}
       >
         <div className="flex items-start gap-3">
-          <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
+          <span className="inline-block w-5 md:w-6 h-1 bg-ink dark:bg-white rounded-full mt-[10px] md:mt-[12px] shrink-0"></span>
           <p>
             <strong>Overview :</strong> {overview}
           </p>
@@ -2119,12 +2111,12 @@ function ExperienceItem({
 
         <div>
           <div className="flex items-start gap-3">
-            <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
+            <span className="inline-block w-5 md:w-6 h-1 bg-ink dark:bg-white rounded-full mt-[10px] md:mt-[12px] shrink-0"></span>
             <p>
               <strong>Key Contributions :</strong>
             </p>
           </div>
-          <ul className="list-disc ml-12 md:ml-16 mt-2 space-y-1.5 text-xl sm:text-2xl md:text-[26px] lg:text-[29px]">
+          <ul className="list-disc ml-10 md:ml-12 mt-2 space-y-1 text-sm sm:text-base md:text-lg">
             {contributions.map((c, i) => (
               <li key={i}>{c}</li>
             ))}
