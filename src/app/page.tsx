@@ -428,7 +428,7 @@ export default function Home() {
   }, [selectedProject, currentIndex, hasPrev, hasNext, filteredProjects]);
 
   return (
-    <main className="bg-white dark:bg-ink text-ink dark:text-white min-h-screen transition-colors relative selection:bg-pink selection:text-white">
+    <main className="bg-white dark:bg-ink text-ink dark:text-white min-h-screen transition-colors relative selection:bg-pink selection:text-white overflow-x-clip">
       {/* NAV */}
       <nav className="sticky top-0 z-50 bg-white/95 dark:bg-ink/95 backdrop-blur-md border-b border-[#31081F]/10 dark:border-[#31081F]/30">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-8 flex items-center justify-between h-[68px] md:h-[76px]">
@@ -554,9 +554,9 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto min-h-[calc(88dvh-68px)] md:min-h-[calc(88dvh-76px)] flex flex-col items-center justify-center py-4 sm:py-6 md:py-8">
+      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto min-h-0 md:min-h-[calc(88dvh-76px)] flex flex-col items-center justify-center pt-4 pb-2 sm:pt-6 sm:pb-4 md:py-8">
         <Reveal variant="fade" delay={50} className="w-full flex flex-col items-center">
-          <h1 className="relative z-0 text-pink font-bold text-center tracking-tighter leading-none select-none text-[clamp(3rem,15.5vw,218px)] mb-[-55px] sm:mb-[-60px] md:mb-[clamp(-210px,-15vw,-65px)] w-full">
+          <h1 className="relative z-0 text-pink font-bold text-center tracking-tighter leading-none select-none text-[clamp(2.8rem,14.5vw,218px)] mb-[-13.5vw] sm:mb-[-14vw] md:mb-[clamp(-210px,-15vw,-65px)] w-full">
             PORTFOLIO
           </h1>
 
@@ -575,7 +575,7 @@ export default function Home() {
 
 
       {/* GET TO KNOW ME */}
-      <section id="about" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
+      <section id="about" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-6 sm:mt-10 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -591,7 +591,7 @@ export default function Home() {
 
         {/* Bio text */}
         <Reveal variant="up" delay={80} className="mt-4 md:mt-6 w-full">
-          <p className="w-full text-base sm:text-lg md:text-xl lg:text-[22px] leading-relaxed text-ink/90 dark:text-white/90 font-normal text-justify">
+          <p className="w-full text-base sm:text-lg md:text-xl lg:text-[22px] leading-relaxed text-ink/90 dark:text-white/90 font-normal text-left sm:text-justify">
             <strong className="font-bold text-ink dark:text-white">Hi there!</strong> I&apos;m{" "}
             <span className="text-pink font-bold">Susiana Salsa Putri</span>, an{" "}
             Information Systems graduate, Graphic Designer, UI/UX Designer, and Web Developer. Obsessed with clean visuals and functional code, I help turn complex concepts into engaging digital products.
@@ -599,16 +599,16 @@ export default function Home() {
         </Reveal>
 
         {/* Modern Tech Stack Cards */}
-        <Reveal variant="up" delay={140} className="mt-8 md:mt-12">
-          <div className="space-y-6">
+        <Reveal variant="up" delay={140} className="mt-6 sm:mt-8 md:mt-12">
+          <div className="space-y-4 sm:space-y-6">
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-pink animate-pulse"></span>
-              <h3 className="text-pink text-lg sm:text-xl font-bold tracking-tight">
+              <h3 className="text-pink text-base sm:text-xl font-bold tracking-tight">
                 Tools & Tech Stack
               </h3>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-4">
               {[
                 { name: "Photoshop", category: "Design", icon: TbBrandAdobePhotoshop, color: "hover:text-[#31A8FF] hover:border-[#31A8FF]/40", bg: "group-hover:bg-[#31A8FF]/10", tag: "Creative" },
                 { name: "Illustrator", category: "Vector", icon: TbBrandAdobeIllustrator, color: "hover:text-[#FF9A00] hover:border-[#FF9A00]/40", bg: "group-hover:bg-[#FF9A00]/10", tag: "Creative" },
@@ -627,23 +627,23 @@ export default function Home() {
                 return (
                   <div
                     key={idx}
-                    className={`group relative flex flex-col gap-4 p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-white/[0.04] border border-black/[0.07] dark:border-white/10 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${item.color}`}
+                    className={`group relative flex flex-col gap-3 sm:gap-4 p-3 sm:p-5 rounded-2xl bg-white/70 dark:bg-white/[0.04] border border-black/[0.07] dark:border-white/10 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${item.color}`}
                   >
                     {/* Top row: icon + tag */}
                     <div className="flex items-center justify-between">
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.06] transition-colors duration-300 ${item.bg} shrink-0`}>
-                        <IconComponent className="text-[26px] transition-transform duration-300 group-hover:scale-110" />
+                      <div className={`w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.06] transition-colors duration-300 ${item.bg} shrink-0`}>
+                        <IconComponent className="text-[22px] sm:text-[26px] transition-transform duration-300 group-hover:scale-110" />
                       </div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] text-ink/60 dark:text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] text-ink/60 dark:text-white/60 whitespace-nowrap">
                         {item.tag}
                       </span>
                     </div>
                     {/* Bottom row: name + category */}
                     <div>
-                      <h4 className="font-bold text-[15px] sm:text-base leading-tight text-ink dark:text-white group-hover:text-pink transition-colors">
+                      <h4 className="font-bold text-sm sm:text-base leading-tight text-ink dark:text-white group-hover:text-pink transition-colors">
                         {item.name}
                       </h4>
-                      <p className="text-xs sm:text-[13px] text-ink/50 dark:text-white/50 font-medium mt-0.5">
+                      <p className="text-[11px] sm:text-[13px] text-ink/50 dark:text-white/50 font-medium mt-0.5">
                         {item.category}
                       </p>
                     </div>
@@ -655,16 +655,16 @@ export default function Home() {
         </Reveal>
 
         {/* INTERACTIVE HORIZONTAL GALLERY */}
-        <Reveal variant="up" delay={200} className="mt-14 md:mt-20">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+        <Reveal variant="up" delay={200} className="mt-10 sm:mt-14 md:mt-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-4 sm:mb-6">
             <div>
               <div className="flex items-center gap-3">
                 <span className="h-2 w-2 rounded-full bg-pink animate-pulse"></span>
-                <h3 className="text-pink text-xl sm:text-2xl font-bold tracking-tight">
+                <h3 className="text-pink text-lg sm:text-2xl font-bold tracking-tight">
                   Life & Highlights Gallery
                 </h3>
               </div>
-              <p className="text-sm sm:text-base text-ink/70 dark:text-white/70 mt-1 font-medium">
+              <p className="text-xs sm:text-base text-ink/70 dark:text-white/70 mt-1 font-medium">
                 Moments, milestones, and behind-the-scenes memories (use the arrows to explore, click to enlarge)
               </p>
             </div>
@@ -680,17 +680,18 @@ export default function Home() {
               type="button"
               onClick={() => scrollGalleryBy("prev")}
               aria-label="Previous gallery items"
-              className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
+              className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="sm:w-5 sm:h-5"
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
@@ -699,7 +700,7 @@ export default function Home() {
             <div
               ref={galleryScrollRef}
               onScroll={handleGalleryScroll}
-              className="flex gap-4 sm:gap-5 overflow-x-auto overflow-y-hidden px-12 sm:px-14 pt-7 pb-7 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none"
+              className="flex gap-3.5 sm:gap-5 overflow-x-auto overflow-y-hidden px-10 sm:px-14 pt-5 pb-5 sm:pt-7 sm:pb-7 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none"
               style={{ perspective: "1000px", touchAction: "pan-y" }}
             >
               {[
@@ -725,7 +726,7 @@ export default function Home() {
                   ref={(el) => {
                     galleryCardRefs.current[i] = el;
                   }}
-                  className="group flex-shrink-0 w-[140px] sm:w-[160px] md:w-[178px] snap-start transition-transform duration-300 ease-out will-change-transform"
+                  className="group flex-shrink-0 w-[130px] sm:w-[160px] md:w-[178px] snap-start transition-transform duration-300 ease-out will-change-transform"
                 >
                   <button
                     type="button"
@@ -737,11 +738,11 @@ export default function Home() {
                       alt={photo.caption}
                       fill
                       draggable={false}
-                      sizes="(max-width: 768px) 160px, 178px"
+                      sizes="(max-width: 768px) 140px, 178px"
                       className="object-cover"
                     />
                   </button>
-                  <p className="mt-2 text-sm sm:text-base font-semibold text-ink dark:text-white truncate">
+                  <p className="mt-2 text-xs sm:text-base font-semibold text-ink dark:text-white truncate">
                     {photo.caption}
                   </p>
                 </div>
@@ -753,17 +754,18 @@ export default function Home() {
               type="button"
               onClick={() => scrollGalleryBy("next")}
               aria-label="Next gallery items"
-              className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
+              className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="sm:w-5 sm:h-5"
               >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
@@ -786,7 +788,7 @@ export default function Home() {
       </section>
 
       {/* BACKGROUND CHECK */}
-      <section id="journey" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
+      <section id="journey" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-10 sm:mt-14 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -803,11 +805,11 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-10 md:mt-14 relative">
+        <div className="mt-8 md:mt-14 relative">
           {/* Timeline spine — left-aligned on mobile, centered on desktop */}
           <div className="absolute left-[9px] sm:left-[11px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-[2px] rounded-full bg-gradient-to-b from-pink via-magenta/50 to-pink/10 dark:from-pink dark:via-magenta/40 dark:to-pink/5" />
 
-          <div className="space-y-12 md:space-y-6">
+          <div className="space-y-7 sm:space-y-9 md:space-y-6">
             {backgroundExperiences.map((exp, i) => {
               const isEven = i % 2 === 0;
               return (
@@ -829,14 +831,14 @@ export default function Home() {
                     {/* Content card */}
                     <div
                       className={`${isEven ? "order-2" : "order-1"
-                        } pl-9 sm:pl-12 md:pl-0 ${isEven ? "md:pl-10 lg:pl-16" : "md:pr-10 lg:pr-16"}`}
+                        } pl-8 sm:pl-10 md:pl-0 ${isEven ? "md:pl-10 lg:pl-16" : "md:pr-10 lg:pr-16"}`}
                     >
                       {/* Mobile-only pill above the card */}
                       <span className="md:hidden inline-flex items-center px-3 py-1 mb-2 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs font-bold shadow-md">
                         {exp.period}
                       </span>
 
-                      <div className="rounded-2xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-3.5 sm:p-4 md:p-5 transition-all duration-300 hover:-translate-y-1">
+                      <div className="rounded-2xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-3.5 sm:p-5 transition-all duration-300 hover:-translate-y-1">
                         <ExperienceItem
                           title={exp.title}
                           role={exp.role}
@@ -856,7 +858,7 @@ export default function Home() {
       </section>
 
       {/* ACADEMIC & TROPHIES */}
-      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
+      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-10 sm:mt-14 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -873,7 +875,7 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-6 md:mt-8 space-y-8 md:space-y-12">
+        <div className="mt-6 md:mt-8 space-y-7 md:space-y-12">
           <Reveal variant="up" delay={60}>
             <div>
               <h3 className="font-bold text-xl sm:text-2xl md:text-3xl text-ink dark:text-white">
@@ -890,7 +892,7 @@ export default function Home() {
               <div className="space-y-2.5 md:space-y-3 text-base sm:text-lg md:text-xl text-ink/90 dark:text-white/90 leading-relaxed w-full">
                 <div className="flex items-start gap-3 w-full">
                   <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
-                  <p className="text-justify flex-1 min-w-0">
+                  <p className="text-left sm:text-justify flex-1 min-w-0">
                     <strong>Key Focus :</strong> Systems Analysis, Database Management, Software Engineering, and Web Development.
                   </p>
                 </div>
@@ -902,8 +904,8 @@ export default function Home() {
                       <strong>Trophy &amp; Achievement :</strong>
                     </p>
                   </div>
-                  <ul className="list-disc ml-8 sm:ml-9 md:ml-10 mt-1.5 space-y-1 text-base sm:text-lg md:text-xl w-full">
-                    <li className="text-justify">
+                  <ul className="list-disc ml-5 sm:ml-8 md:ml-10 mt-1.5 space-y-1 text-base sm:text-lg md:text-xl w-full">
+                    <li className="text-left sm:text-justify">
                       1st Place Winner — UI/UX Competition by Google Developer Groups on Campus (GDGoC) Gunadarma (2025).
                     </li>
                   </ul>
@@ -927,14 +929,14 @@ export default function Home() {
               <div className="space-y-2.5 md:space-y-3 text-base sm:text-lg md:text-xl text-ink/90 dark:text-white/90 leading-relaxed w-full">
                 <div className="flex items-start gap-3 w-full">
                   <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
-                  <p className="text-justify flex-1 min-w-0">
+                  <p className="text-left sm:text-justify flex-1 min-w-0">
                     <strong>Key Focus :</strong> Graphic Design, Visual Layouts, Photographs, Video Production, and Digital Media Fundamentals.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 w-full">
                   <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
-                  <p className="text-justify flex-1 min-w-0">
+                  <p className="text-left sm:text-justify flex-1 min-w-0">
                     Established the core artistic foundation in visual communication and design principles.
                   </p>
                 </div>
@@ -948,7 +950,7 @@ export default function Home() {
       <section
         id="works"
         ref={worksSectionRef}
-        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24 pb-20 md:pb-28"
+        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-10 sm:mt-14 md:mt-20 lg:mt-24 pb-14 sm:pb-20 md:pb-28"
       >
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
@@ -968,23 +970,23 @@ export default function Home() {
 
         {/* Category & Institution Filters */}
         <Reveal variant="fade" delay={60}>
-          <div className="mt-8 md:mt-10 space-y-4">
+          <div className="mt-6 sm:mt-8 md:mt-10 space-y-3.5 sm:space-y-4">
             {/* Primary Filter: Category Tabs */}
-            <div className="flex flex-wrap gap-2.5 sm:gap-4">
+            <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
               {categories.map((cat) => {
                 const isSelected = activeCategory === cat.label;
                 return (
                   <button
                     key={cat.label}
                     onClick={() => handleCategorySelect(cat.label)}
-                    className={`group px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-sm sm:text-base md:text-lg font-normal transition-all cursor-pointer flex items-center gap-2 ${isSelected
+                    className={`group px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-base font-normal transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 ${isSelected
                       ? "bg-pink text-white shadow-md ring-2 ring-pink/30"
                       : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                       }`}
                   >
                     <span>{cat.label}</span>
                     <span
-                      className={`text-xs px-2 py-0.5 rounded-full font-bold ${isSelected
+                      className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-bold ${isSelected
                         ? "bg-white/25 text-white"
                         : "bg-[#31081F]/10 dark:bg-white/15 text-ink dark:text-white group-hover:bg-white/20 group-hover:text-white"
                         }`}
@@ -997,8 +999,8 @@ export default function Home() {
             </div>
 
             {/* Secondary Filter: Institution Chips */}
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#31081F]/10 dark:border-white/10">
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-pink mr-1 select-none">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-2 border-t border-[#31081F]/10 dark:border-white/10">
+              <span className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-pink mr-1 select-none">
                 AFFILIATION:
               </span>
               {institutions.map((inst) => {
@@ -1007,14 +1009,14 @@ export default function Home() {
                   <button
                     key={inst.label}
                     onClick={() => handleInstitutionSelect(inst.label)}
-                    className={`px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-normal transition-all cursor-pointer flex items-center gap-1.5 ${isSelected
+                    className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-normal transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 ${isSelected
                       ? "bg-magenta text-white font-bold shadow-sm"
                       : "bg-white dark:bg-[#1f0015] border border-[#31081F]/15 dark:border-white/15 text-ink/80 dark:text-white/80 hover:border-pink hover:text-pink"
                       }`}
                   >
                     <span>{inst.display}</span>
                     {inst.count !== undefined && (
-                      <span className="opacity-70 text-xs">({inst.count})</span>
+                      <span className="opacity-70 text-[10px] sm:text-xs">({inst.count})</span>
                     )}
                   </button>
                 );
@@ -1024,7 +1026,7 @@ export default function Home() {
         </Reveal>
 
         {/* Status Count & Reset Filter */}
-        <div className="mt-6 flex items-center justify-between text-xs sm:text-sm text-ink/60 dark:text-white/60">
+        <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-ink/60 dark:text-white/60">
           <span>
             Showing{" "}
             <strong className="text-ink dark:text-white font-bold">
@@ -1061,16 +1063,16 @@ export default function Home() {
         </div>
 
         {/* Works Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 md:gap-8 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 md:gap-8 mt-5 sm:mt-6">
           {displayedProjects.map((project, index) => (
             <Reveal key={project.id} variant="up" delay={(index % 6) * 40}>
               <div
                 onClick={() => setSelectedProject(project)}
-                className="group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
+                className="group relative rounded-[20px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
               >
 
                 {/* Image Container */}
-                <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-4 sm:p-5">
+                <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-3.5 sm:p-5">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -1086,7 +1088,7 @@ export default function Home() {
                 </div>
 
                 {/* Card Info Section */}
-                <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-2.5">
+                <div className="p-3.5 sm:p-5 flex flex-col flex-1 justify-between gap-2.5">
                   <div>
                     {/* Project Type / Category + Tag */}
                     <div className="flex flex-wrap items-center gap-1.5 mb-2">
@@ -1207,7 +1209,7 @@ export default function Home() {
         {totalPages > 1 && (
           <Reveal variant="fade" delay={80}>
             <nav
-              className="flex items-center justify-center gap-2 sm:gap-3 mt-12 md:mt-16 select-none"
+              className="flex items-center justify-center gap-1 sm:gap-3 mt-8 sm:mt-12 md:mt-16 select-none"
               aria-label="Projects pagination"
             >
               {/* Prev Button */}
@@ -1215,7 +1217,7 @@ export default function Home() {
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 aria-label="Previous page"
-                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === 1
+                className={`group inline-flex items-center gap-1.5 px-2.5 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === 1
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
                   : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
@@ -1237,13 +1239,13 @@ export default function Home() {
               </button>
 
               {/* Page Number Buttons */}
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 {getPageNumbers(currentPage, totalPages).map((page, idx) => {
                   if (page === "...") {
                     return (
                       <span
                         key={`ellipsis-${idx}`}
-                        className="w-7 h-9 sm:w-9 sm:h-11 flex items-center justify-center text-ink/40 dark:text-white/40 font-bold text-xs sm:text-sm select-none"
+                        className="w-5 sm:w-9 h-8 sm:h-11 flex items-center justify-center text-ink/40 dark:text-white/40 font-bold text-xs sm:text-sm select-none"
                       >
                         …
                       </span>
@@ -1259,7 +1261,7 @@ export default function Home() {
                       onClick={() => handlePageChange(pageNum)}
                       aria-current={isActive ? "page" : undefined}
                       aria-label={`Page ${pageNum}`}
-                      className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
+                      className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
                         ? "bg-pink text-white shadow-md"
                         : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                         }`}
@@ -1275,7 +1277,7 @@ export default function Home() {
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 aria-label="Next page"
-                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === totalPages
+                className={`group inline-flex items-center gap-1.5 px-2.5 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === totalPages
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
                   : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
@@ -1301,16 +1303,16 @@ export default function Home() {
 
         {/* CERTIFICATES & LICENSES */}
         <div id="certificates-section" />
-        <Reveal variant="up" className="mt-14 sm:mt-16 md:mt-20 lg:mt-24">
-          <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
+        <Reveal variant="up" className="mt-10 sm:mt-14 md:mt-20 lg:mt-24">
+          <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-start sm:items-center gap-3 sm:gap-4 tracking-tight">
             <Image
               src="/element-star.svg"
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
-            CERTIFICATES &amp; LICENSES
+            <span>CERTIFICATES &amp; LICENSES</span>
           </h2>
           <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             recognized skills &amp; industry credentials
@@ -1319,23 +1321,21 @@ export default function Home() {
 
         {/* Certificate Category Tabs */}
         <Reveal variant="fade" delay={60}>
-          <div className="flex flex-wrap gap-2.5 sm:gap-3.5 mt-8 md:mt-10">
+          <div className="flex flex-wrap gap-2 sm:gap-3.5 mt-6 sm:mt-8 md:mt-10">
             {certCategories.map((cat) => {
-
-
               const isSelected = activeCertCategory === cat.label;
               return (
                 <button
                   key={cat.label}
                   onClick={() => handleCertCategorySelect(cat.label)}
-                  className={`group px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-normal transition-all cursor-pointer flex items-center gap-2 ${isSelected
+                  className={`group px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-base font-normal transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 ${isSelected
                     ? "bg-pink text-white shadow-md ring-2 ring-pink/30"
                     : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                     }`}
                 >
                   <span>{cat.display}</span>
                   <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-bold ${isSelected
+                    className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-bold ${isSelected
                       ? "bg-white/25 text-white"
                       : "bg-[#31081F]/10 dark:bg-white/15 text-ink dark:text-white group-hover:bg-white/20 group-hover:text-white"
                       }`}
@@ -1349,7 +1349,7 @@ export default function Home() {
         </Reveal>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mt-8 md:mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5 mt-6 sm:mt-8 md:mt-10">
           {displayedCertificates.map((cert, index) => {
             const isGunadarma = cert.category === "Gunadarma";
             const isLPK = cert.category === "LPK";
@@ -1498,7 +1498,7 @@ export default function Home() {
         {certTotalPages > 1 && (
           <Reveal variant="fade" delay={80}>
             <nav
-              className="flex items-center justify-center gap-2 sm:gap-3 mt-12 md:mt-16 select-none"
+              className="flex items-center justify-center gap-1 sm:gap-3 mt-8 sm:mt-12 md:mt-16 select-none"
               aria-label="Certificates pagination"
             >
               {/* Prev Button */}
@@ -1506,7 +1506,7 @@ export default function Home() {
                 onClick={() => handleCertPageChange(certCurrentPage - 1)}
                 disabled={certCurrentPage === 1}
                 aria-label="Previous page"
-                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === 1
+                className={`group inline-flex items-center gap-1.5 px-2.5 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === 1
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
                   : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
@@ -1528,13 +1528,13 @@ export default function Home() {
               </button>
 
               {/* Page Number Buttons */}
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 {getPageNumbers(certCurrentPage, certTotalPages).map((page, idx) => {
                   if (page === "...") {
                     return (
                       <span
                         key={`cert-ellipsis-${idx}`}
-                        className="w-7 h-9 sm:w-9 sm:h-11 flex items-center justify-center text-ink/40 dark:text-white/40 font-bold text-xs sm:text-sm select-none"
+                        className="w-5 sm:w-9 h-8 sm:h-11 flex items-center justify-center text-ink/40 dark:text-white/40 font-bold text-xs sm:text-sm select-none"
                       >
                         …
                       </span>
@@ -1550,7 +1550,7 @@ export default function Home() {
                       onClick={() => handleCertPageChange(pageNum)}
                       aria-current={isActive ? "page" : undefined}
                       aria-label={`Page ${pageNum}`}
-                      className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
+                      className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
                         ? "bg-pink text-white shadow-md"
                         : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                         }`}
@@ -1566,7 +1566,7 @@ export default function Home() {
                 onClick={() => handleCertPageChange(certCurrentPage + 1)}
                 disabled={certCurrentPage === certTotalPages}
                 aria-label="Next page"
-                className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === certTotalPages
+                className={`group inline-flex items-center gap-1.5 px-2.5 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === certTotalPages
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
                   : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
@@ -1594,7 +1594,7 @@ export default function Home() {
       {/* LET'S CONNECT / CONTACT */}
       <section
         id="contact"
-        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24 pb-16 md:pb-24"
+        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-10 sm:mt-14 md:mt-20 lg:mt-24 pb-12 sm:pb-16 md:pb-24"
       >
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
@@ -1612,44 +1612,44 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="mt-6 sm:mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
           {/* Left Column (lg:col-span-5): Availability Status & Introductory Message */}
-          <Reveal variant="up" delay={60} className="lg:col-span-5 space-y-4">
+          <Reveal variant="up" delay={60} className="lg:col-span-5 space-y-3.5 sm:space-y-4">
             {/* Availability Status Card */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-bold">
+            <div className="inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-bold">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
               <span>Available for Freelance &amp; Full-Time Opportunities</span>
             </div>
 
-            <p className="text-sm sm:text-base md:text-lg text-ink/80 dark:text-white/80 leading-relaxed pt-1 text-justify">
+            <p className="text-sm sm:text-base md:text-lg text-ink/80 dark:text-white/80 leading-relaxed pt-1 text-left sm:text-justify">
               Whether you have a UI/UX design project, visual branding needs, freelance inquiry, or full-time opportunity, I&apos;m always excited to collaborate and create meaningful digital experiences.
             </p>
           </Reveal>
 
           {/* Right Column (lg:col-span-7): 3 Contact Channels */}
-          <Reveal variant="up" delay={120} className="lg:col-span-7 space-y-3.5">
+          <Reveal variant="up" delay={120} className="lg:col-span-7 space-y-3 sm:space-y-3.5">
             {/* 1. Email Card */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-pink/25 dark:border-pink/35 shadow-sm hover:border-pink/50 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-11 h-11 rounded-xl bg-pink/10 text-pink flex items-center justify-center shrink-0">
+            <div className="p-3.5 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-pink/25 dark:border-pink/35 shadow-sm hover:border-pink/50 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-pink/10 text-pink flex items-center justify-center shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs uppercase tracking-wider font-bold text-pink block mb-0.5">Email</span>
+                  <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-pink block mb-0.5">Email</span>
                   <span className="text-sm sm:text-base font-bold text-ink dark:text-white select-all block truncate">
                     susianasalsap@gmail.com
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
                 <button
                   type="button"
                   onClick={() => handleCopyEmail("susianasalsap@gmail.com")}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${copiedEmail
+                  className={`flex-1 sm:flex-initial px-3.5 py-2 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${copiedEmail
                     ? "bg-emerald-500 text-white shadow-sm"
                     : "bg-[#31081F]/5 dark:bg-white/10 hover:bg-pink hover:text-white text-ink dark:text-white"
                     }`}
@@ -1668,7 +1668,7 @@ export default function Home() {
                 </button>
                 <a
                   href="mailto:susianasalsap@gmail.com"
-                  className="px-4 py-2 rounded-xl bg-pink text-white hover:bg-[#d01580] text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5"
+                  className="flex-1 sm:flex-initial px-4 py-2 sm:py-2 rounded-xl bg-pink text-white hover:bg-[#d01580] text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5"
                 >
                   <span>Send Mail</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
@@ -1681,14 +1681,14 @@ export default function Home() {
               href="https://www.linkedin.com/in/susiana-salsa-putri"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-[#31081F]/10 dark:border-white/10 hover:border-[#0077B5]/50 hover:shadow-md transition-all"
+              className="group flex items-center justify-between p-3.5 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-[#31081F]/10 dark:border-white/10 hover:border-[#0077B5]/50 hover:shadow-md transition-all"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-[#0077B5]/10 text-[#0077B5] flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-3 sm:gap-3.5">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#0077B5]/10 text-[#0077B5] flex items-center justify-center shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                 </div>
                 <div>
-                  <span className="text-xs uppercase tracking-wider font-bold text-[#0077B5] block mb-0.5">LinkedIn</span>
+                  <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-[#0077B5] block mb-0.5">LinkedIn</span>
                   <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">Susiana Salsa Putri</span>
                 </div>
               </div>
@@ -1700,14 +1700,14 @@ export default function Home() {
               href="https://github.com/asacore"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-[#31081F]/10 dark:border-white/10 hover:border-pink/50 hover:shadow-md transition-all"
+              className="group flex items-center justify-between p-3.5 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-[#31081F]/10 dark:border-white/10 hover:border-pink/50 hover:shadow-md transition-all"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-black/10 dark:bg-white/10 text-ink dark:text-white flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-3 sm:gap-3.5">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-black/10 dark:bg-white/10 text-ink dark:text-white flex items-center justify-center shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
                 </div>
                 <div>
-                  <span className="text-xs uppercase tracking-wider font-bold text-ink/60 dark:text-white/60 block mb-0.5">GitHub</span>
+                  <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-ink/60 dark:text-white/60 block mb-0.5">GitHub</span>
                   <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">susianasalsa</span>
                 </div>
               </div>
@@ -1757,7 +1757,7 @@ export default function Home() {
           {/* Close button */}
           <button
             onClick={() => setSelectedProject(null)}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer text-xl font-bold shadow-lg"
+            className="absolute top-3 right-3 sm:top-6 sm:right-6 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer text-base sm:text-xl font-bold shadow-lg"
             aria-label="Close Preview"
           >
             ✕
@@ -1770,10 +1770,10 @@ export default function Home() {
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="absolute left-2 sm:left-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
+              className="absolute left-1.5 sm:left-6 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
               aria-label="Previous Project"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-5 sm:h-5"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
           )}
 
@@ -1784,10 +1784,10 @@ export default function Home() {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-2 sm:right-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
+              className="absolute right-1.5 sm:right-6 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
               aria-label="Next Project"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-5 sm:h-5"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
           )}
 
@@ -1797,7 +1797,7 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image Preview Area */}
-            <div className="relative w-full h-[52vh] sm:h-[62vh] flex items-center justify-center">
+            <div className="relative w-full h-[36vh] sm:h-[50vh] md:h-[62vh] flex items-center justify-center">
               <Image
                 src={
                   selectedProject.gallery && selectedProject.gallery[activeGalleryIndex]
@@ -1825,10 +1825,10 @@ export default function Home() {
                         prev > 0 ? prev - 1 : (selectedProject.gallery?.length ?? 1) - 1
                       );
                     }}
-                    className="absolute left-2 sm:left-4 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
+                    className="absolute left-2 sm:left-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
                     aria-label="Previous Photo"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="15 18 9 12 15 6" /></svg>
                   </button>
                   <button
                     onClick={(e) => {
@@ -1837,10 +1837,10 @@ export default function Home() {
                         prev < (selectedProject.gallery?.length ?? 1) - 1 ? prev + 1 : 0
                       );
                     }}
-                    className="absolute right-2 sm:right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
+                    className="absolute right-2 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
                     aria-label="Next Photo"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="9 18 15 12 9 6" /></svg>
                   </button>
                 </>
               )}
@@ -1879,7 +1879,7 @@ export default function Home() {
             )}
 
             {/* Info Card */}
-            <div className="mt-3.5 w-full max-w-3xl px-5 py-4 sm:px-6 sm:py-5 rounded-2xl bg-white/10 dark:bg-black/75 backdrop-blur-xl border border-white/15 text-white flex flex-col gap-3 shadow-2xl">
+            <div className="mt-3.5 w-full max-w-3xl px-4 py-3.5 sm:px-6 sm:py-5 rounded-2xl bg-white/10 dark:bg-black/75 backdrop-blur-xl border border-white/15 text-white flex flex-col gap-3 shadow-2xl">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -2048,7 +2048,7 @@ export default function Home() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fadeIn"
           onClick={() => setSelectedGalleryPhoto(null)}
         >
           <div
@@ -2058,14 +2058,14 @@ export default function Home() {
             <button
               onClick={() => setSelectedGalleryPhoto(null)}
               aria-label="Close photo preview"
-              className="absolute -top-12 right-0 sm:right-2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 backdrop-blur-sm transition-all"
+              className="absolute top-3 right-3 sm:-top-12 sm:right-2 z-20 text-white/80 hover:text-white bg-black/60 sm:bg-white/10 hover:bg-white/20 rounded-full p-2 backdrop-blur-sm transition-all cursor-pointer"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
-            <div className="relative w-full h-[70vh] sm:h-[80vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-black">
+            <div className="relative w-full h-[60vh] sm:h-[80vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-black">
               <Image
                 src={selectedGalleryPhoto}
                 alt="Enlarged gallery photo"
@@ -2113,7 +2113,7 @@ function ExperienceItem({
       >
         <div className="flex items-start gap-2.5">
           <span className="inline-block w-4 md:w-5 h-[2px] bg-ink dark:bg-white rounded-full mt-[8px] md:mt-[9px] shrink-0"></span>
-          <p className="text-justify flex-1">
+          <p className="text-left sm:text-justify flex-1">
             <strong>Overview :</strong> {overview}
           </p>
         </div>
@@ -2125,9 +2125,9 @@ function ExperienceItem({
               <strong>Key Contributions :</strong>
             </p>
           </div>
-          <ul className="list-disc ml-8 md:ml-10 mt-1.5 space-y-1 text-xs sm:text-sm md:text-base">
+          <ul className="list-disc ml-5 sm:ml-8 md:ml-10 mt-1.5 space-y-1 text-xs sm:text-sm md:text-base">
             {contributions.map((c, i) => (
-              <li key={i} className="text-justify">{c}</li>
+              <li key={i} className="text-left sm:text-justify">{c}</li>
             ))}
           </ul>
         </div>

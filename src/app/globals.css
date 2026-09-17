@@ -12,8 +12,14 @@
 }
 
 html {
-  /* offset anchor scrolls by the sticky navbar height */
-  scroll-padding-top: 76px;
+  /* offset anchor scrolls by the sticky navbar height (68px mobile, 76px desktop) */
+  scroll-padding-top: 68px;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 76px;
+  }
 }
 
 body {
