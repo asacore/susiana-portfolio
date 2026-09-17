@@ -233,10 +233,10 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "uiux-home-dashboard",
-    title: "Modern Web & Mobile Dashboard UI",
+    title: "Home Buying & Rental Mobile App UI",
     category: "UI/UX Design",
     institution: "UI/UX Case Study",
-    tag: "Dashboard UI System",
+    tag: "Mobile App UI System",
     image: "/uiux/HOME UI.png",
     width: 2602,
     height: 1794,
