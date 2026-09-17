@@ -176,18 +176,6 @@ export const certificatesData: CertificateItem[] = [
     description:
       "Pelatihan pembuatan aplikasi web dari pengenalan tools, pembuatan sistem, implementasi database, UI, hingga bahasa pemrograman.",
   },
-  {
-    id: "cert-guna-aptitude-test-2026",
-    title: "Aptitude Test",
-    issuer: "Universitas Gunadarma",
-    category: "Gunadarma",
-    date: "23 Juli 2026",
-    credentialId: "834573/AT/FPSI/2026",
-    pdfPath: "/certificates/aptitude-test-2026.pdf",
-    skills: ["Berpikir Abstrak", "Penalaran Logika", "Kemampuan Membuat Kesimpulan"],
-    description:
-      "Hasil pemeriksaan psikologi Aptitude Test yang mengukur kemampuan berpikir abstrak, penalaran logika, dan kemampuan membuat kesimpulan.",
-  },
 
   /* ══════════════════════════════════════════════════════════════════
      LPK LUAR (Lembaga Pelatihan Kerja & Sertifikasi Profesi)
@@ -241,5 +229,16 @@ export const certificatesData: CertificateItem[] = [
     skills: ["Front End Development"],
     description:
       "Sertifikat partisipasi aktif dalam program DSF 23 — Front End Developer oleh dibimbing.id.",
+  },
+  {
+    id: "cert-bootcamp-efset-english-2026",
+    title: "EF SET English Certificate — C2 Proficient",
+    issuer: "EF Standard English Test (EF SET)",
+    category: "Bootcamp",
+    date: "12 Juli 2026",
+    credentialUrl: "https://cert.efset.org/id/dffdcG",
+    skills: ["English Proficiency", "Reading", "Listening", "CEFR C2"],
+    description:
+      "Sertifikat kemampuan bahasa Inggris dari EF SET dengan skor 94/100, setara level C2 Mahir (Proficient) sesuai Kerangka Acuan Umum Eropa (CEFR) — Membaca: 100, Mendengarkan: 87.",
   },
 ];

@@ -27,6 +27,12 @@ export const metadata: Metadata = {
 
   metadataBase: new URL("https://susiana-portfolio.vercel.app/"),
 
+  icons: {
+    icon: "/element-star.svg",
+    shortcut: "/element-star.svg",
+    apple: "/element-star.svg",
+  },
+
   openGraph: {
     title: "Susiana Salsa Putri | Graphic Designer & UI/UX Designer",
     description:

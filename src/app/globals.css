@@ -11,6 +11,11 @@
   --font-altee: var(--font-altee), Arial, Helvetica, sans-serif;
 }
 
+html {
+  /* offset anchor scrolls by the sticky navbar height */
+  scroll-padding-top: 76px;
+}
+
 body {
   font-family: var(--font-altee), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -45,6 +50,27 @@ body {
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* ── Section Star Spin Animation ── */
+@keyframes starSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+.star-spin {
+  transform-origin: center;
+}
+
+/* spin triggers when the parent reveal wrapper becomes visible */
+.reveal-init.is-revealed .star-spin {
+  animation: starSpin 1.6s cubic-bezier(0.45, 0, 0.55, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init.is-revealed .star-spin {
+    animation: none;
   }
 }
 

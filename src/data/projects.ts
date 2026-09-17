@@ -17,7 +17,7 @@ export interface ProjectItem {
   id: string;
   title: string;
   category: "Graphic Design" | "UI/UX Design" | "Web Development";
-  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University" | "Gunadarma Code Week 4.0";
+  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University" | "Gunadarma Code Week 2.0";
   tag: string;
   image: string;
   width: number;
@@ -34,15 +34,15 @@ export interface ProjectItem {
 export const projectsData: ProjectItem[] = [
 
   /* ══════════════════════════════════════════════════════════════════
-     GUNADARMA CODE WEEK 4.0 (Graphic Design)
+     Gunadarma Code Week 2.0 (Graphic Design)
      ══════════════════════════════════════════════════════════════════ */
   {
     id: "gcw-coming-soon",
-    title: "Gunadarma Code Week 4.0 — Coming Soon",
+    title: "Gunadarma Code Week 2.0 — Coming Soon",
     category: "Graphic Design",
-    institution: "Gunadarma Code Week 4.0",
+    institution: "Gunadarma Code Week 2.0",
     tag: "Key Visual & Announcement",
-    image: "/project gcw 4.0/COMING SOON GCW.png",
+    image: "/project gcw 2.0/COMING SOON GCW.png",
     width: 1080,
     height: 1440,
     featured: true,
@@ -52,29 +52,33 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "gcw-hc-handbook",
-    title: "HC Handbook — Gunadarma Code Week 4.0",
+    title: "HC Handbook — Gunadarma Code Week 2.0",
     category: "Graphic Design",
-    institution: "Gunadarma Code Week 4.0",
+    institution: "Gunadarma Code Week 2.0",
     tag: "Handbook Design",
-    image: "/project gcw 4.0/HC - Handbook cover.png",
+    image: "/project gcw 2.0/HC - Handbook cover.png",
     width: 1080,
     height: 1440,
     featured: true,
+    description:
+      "Hackathon Judges Handbook for Gunadarma Code Week 2.0, designed to guide the judging panel through the competition timeline (Proposal Submission, Video Pitch & Deck, and Grand Final), the 6-component scoring breakdown, and the judges' evaluation flow and responsibilities.",
     links: {
-      handbook: "/project gcw 4.0/HC - Handbook.pdf",
+      handbook: "/project gcw 2.0/HC - Handbook.pdf",
     },
   },
   {
     id: "gcw-hc-guidebook",
-    title: "HC Guidebook — Gunadarma Code Week 4.0",
+    title: "HC Guidebook — Gunadarma Code Week 2.0",
     category: "Graphic Design",
-    institution: "Gunadarma Code Week 4.0",
+    institution: "Gunadarma Code Week 2.0",
     tag: "Guidebook Design",
-    image: "/project gcw 4.0/HC - Guidebook cover.png",
+    image: "/project gcw 2.0/HC - Guidebook cover.png",
     width: 1080,
     height: 1440,
+    description:
+      "Official Hackathon Guidebook for Gunadarma Code Week 2.0 under the theme \"BuildLocal: Tech Solutions for Indonesian MSMEs.\" Covers the competition description, sub-themes, participant requirements, timeline, technical execution across three phases, registration procedure, scoring components, and prizes.",
     links: {
-      guidebook: "/project gcw 4.0/HC - Guidebook.pdf",
+      guidebook: "/project gcw 2.0/HC - Guidebook.pdf",
     },
   },
 
@@ -173,6 +177,9 @@ export const projectsData: ProjectItem[] = [
     width: 10272,
     height: 9372,
     featured: true,
+    group: "Group Project",
+    groupDescription:
+      "Built as a group assignment for a university course, together with Gita Pangestuti (UI/UX Designer) and Cindy Novita Hidayat (Database); my role was the developer.",
     links: {
       github: "https://github.com/asacore/web-notes",
     },
@@ -187,7 +194,8 @@ export const projectsData: ProjectItem[] = [
     width: 1920,
     height: 1080,
     group: "Group Project",
-    groupDescription: "Built as a group assignment; my role was the programmer.",
+    groupDescription:
+      "Built as a group assignment together with Asti, Belinda, Aldiansya, and Malvin; my role was the developer.",
     links: {
       github: "https://github.com/asacore/yur-sayur",
     },
@@ -202,7 +210,8 @@ export const projectsData: ProjectItem[] = [
     width: 1920,
     height: 1080,
     group: "Group Project",
-    groupDescription: "Final project for a course, built in a group; my role was the programmer.",
+    groupDescription:
+      "Final project for the Software & Information Systems Design (PPSI) course, submitted in place of the midterm exam, with Asti (UI/UX), Belinda (Project Manager), Aldiansya & Pretty (Business Analysts), Susiana (Programmer), and Malvin (Testing).",
     links: {
       github: "https://github.com/asacore/sps-kenanga",
     },

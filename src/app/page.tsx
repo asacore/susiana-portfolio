@@ -323,9 +323,9 @@ export default function Home() {
       count: projectsData.filter((p) => p.institution === "Gunadarma University").length,
     },
     {
-      label: "Gunadarma Code Week 4.0",
-      display: "Gunadarma Code Week 4.0",
-      count: projectsData.filter((p) => p.institution === "Gunadarma Code Week 4.0").length,
+      label: "Gunadarma Code Week 2.0",
+      display: "Gunadarma Code Week 2.0",
+      count: projectsData.filter((p) => p.institution === "Gunadarma Code Week 2.0").length,
     },
   ], []);
 
@@ -445,7 +445,7 @@ export default function Home() {
           </a>
 
           {/* Nav links — center */}
-          <div className="hidden md:flex items-center gap-3.5 lg:gap-5 xl:gap-6 text-[17px] lg:text-[21px] xl:text-[23px]">
+          <div className="hidden md:flex items-center gap-3.5 lg:gap-5 xl:gap-6 text-[17px] lg:text-[19px] xl:text-[21px]">
             <a
               href="#about"
               style={{ color: "#B91372" }}
@@ -477,13 +477,9 @@ export default function Home() {
             {/* Let's Connect Button — desktop only, moved into burger menu on mobile */}
             <a
               href="#contact"
-              className="hidden md:group md:relative md:inline-flex items-center justify-center px-3.5 sm:px-5 py-1.5 sm:py-[7px] rounded-full text-[13px] sm:text-[15px] lg:text-[17px] font-bold whitespace-nowrap overflow-hidden transition-colors duration-300 border-2 border-magenta dark:border-pink/80 text-magenta dark:text-white bg-white dark:bg-[#180010] hover:text-white dark:hover:text-white hover:border-pink dark:hover:border-pink shrink-0"
+              className="hidden md:inline-flex items-center justify-center px-3.5 sm:px-5 py-1.5 sm:py-[7px] rounded-full text-[13px] sm:text-[15px] lg:text-[17px] font-bold whitespace-nowrap transition-colors duration-200 border-2 border-magenta dark:border-pink/80 text-magenta dark:text-white bg-white dark:bg-[#180010] hover:bg-pink hover:border-pink hover:text-white dark:hover:bg-pink dark:hover:border-pink dark:hover:text-white shrink-0"
             >
-              <span
-                className="absolute inset-0 bg-gradient-to-b from-[#FA198B] to-[#B91372] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                aria-hidden="true"
-              />
-              <span className="relative z-10">Let&apos;s Connect!</span>
+              Let&apos;s Connect!
             </a>
 
             {/* Hamburger — mobile only, modern morphing icon, no border/circle */}
@@ -549,7 +545,7 @@ export default function Home() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-1 inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full text-[15px] font-bold bg-gradient-to-b from-[#FA198B] to-[#B91372] text-white shadow-sm transition-transform active:scale-95"
+              className="mt-1 inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full text-[15px] font-bold bg-gradient-to-b from-[#FA198B] to-[#B91372] text-white shadow-sm transition-colors"
             >
               Let&apos;s Connect!
             </a>
@@ -558,9 +554,9 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto pt-10 md:pt-16 flex flex-col items-center">
+      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto min-h-[calc(88dvh-68px)] md:min-h-[calc(88dvh-76px)] flex flex-col items-center justify-center py-4 sm:py-6 md:py-8">
         <Reveal variant="fade" delay={50} className="w-full flex flex-col items-center">
-          <h1 className="relative z-0 text-pink font-bold text-center tracking-tighter leading-none select-none text-[clamp(3rem,15.5vw,218px)] mb-[clamp(-210px,-15vw,-65px)] w-full">
+          <h1 className="relative z-0 text-pink font-bold text-center tracking-tighter leading-none select-none text-[clamp(3rem,15.5vw,218px)] mb-[-55px] sm:mb-[-60px] md:mb-[clamp(-210px,-15vw,-65px)] w-full">
             PORTFOLIO
           </h1>
 
@@ -579,7 +575,7 @@ export default function Home() {
 
 
       {/* GET TO KNOW ME */}
-      <section id="about" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-20 md:mt-32">
+      <section id="about" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -587,7 +583,7 @@ export default function Home() {
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
             GET TO KNOW ME!
           </h2>
@@ -595,8 +591,8 @@ export default function Home() {
 
         {/* Bio text */}
         <Reveal variant="up" delay={80} className="mt-4 md:mt-6 w-full">
-          <p className="w-full text-xl sm:text-2xl md:text-[26px] lg:text-[29px] leading-snug md:leading-normal text-ink dark:text-white font-normal">
-            <strong className="font-bold">Hi there!</strong> I&apos;m{" "}
+          <p className="w-full text-base sm:text-lg md:text-xl lg:text-[22px] leading-relaxed text-ink/90 dark:text-white/90 font-normal text-justify">
+            <strong className="font-bold text-ink dark:text-white">Hi there!</strong> I&apos;m{" "}
             <span className="text-pink font-bold">Susiana Salsa Putri</span>, an{" "}
             Information Systems graduate, Graphic Designer, UI/UX Designer, and Web Developer. Obsessed with clean visuals and functional code, I help turn complex concepts into engaging digital products.
           </p>
@@ -607,7 +603,7 @@ export default function Home() {
           <div className="space-y-6">
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-pink animate-pulse"></span>
-              <h3 className="text-pink text-xl sm:text-2xl font-bold tracking-tight">
+              <h3 className="text-pink text-lg sm:text-xl font-bold tracking-tight">
                 Tools & Tech Stack
               </h3>
             </div>
@@ -631,21 +627,23 @@ export default function Home() {
                 return (
                   <div
                     key={idx}
-                    className={`group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl bg-white/70 dark:bg-white/[0.04] border border-black/[0.07] dark:border-white/10 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${item.color}`}
+                    className={`group relative flex flex-col gap-4 p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-white/[0.04] border border-black/[0.07] dark:border-white/10 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg ${item.color}`}
                   >
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.06] transition-colors duration-300 ${item.bg}`}>
-                        <IconComponent className="text-2xl transition-transform duration-300 group-hover:scale-110" />
+                    {/* Top row: icon + tag */}
+                    <div className="flex items-center justify-between">
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center bg-black/[0.03] dark:bg-white/[0.06] transition-colors duration-300 ${item.bg} shrink-0`}>
+                        <IconComponent className="text-[26px] transition-transform duration-300 group-hover:scale-110" />
                       </div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] text-ink/60 dark:text-white/60">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] text-ink/60 dark:text-white/60 whitespace-nowrap">
                         {item.tag}
                       </span>
                     </div>
+                    {/* Bottom row: name + category */}
                     <div>
-                      <h4 className="font-bold text-sm sm:text-base text-ink dark:text-white group-hover:text-pink transition-colors">
+                      <h4 className="font-bold text-[15px] sm:text-base leading-tight text-ink dark:text-white group-hover:text-pink transition-colors">
                         {item.name}
                       </h4>
-                      <p className="text-xs text-ink/50 dark:text-white/50 font-medium">
+                      <p className="text-xs sm:text-[13px] text-ink/50 dark:text-white/50 font-medium mt-0.5">
                         {item.category}
                       </p>
                     </div>
@@ -682,7 +680,7 @@ export default function Home() {
               type="button"
               onClick={() => scrollGalleryBy("prev")}
               aria-label="Previous gallery items"
-              className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:bg-pink hover:text-white hover:border-pink hover:scale-105 active:scale-95 cursor-pointer"
+              className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
             >
               <svg
                 width="20"
@@ -732,7 +730,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setSelectedGalleryPhoto(photo.src)}
-                    className="relative block w-full aspect-square rounded-2xl overflow-hidden bg-plum/5 dark:bg-white/5 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:shadow-xl group-hover:shadow-pink/20 group-hover:ring-pink/40 group-hover:-translate-y-1"
+                    className="relative block w-full aspect-square rounded-2xl overflow-hidden bg-plum/5 dark:bg-white/5 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-shadow duration-300 group-hover:shadow-md"
                   >
                     <Image
                       src={photo.src}
@@ -740,7 +738,7 @@ export default function Home() {
                       fill
                       draggable={false}
                       sizes="(max-width: 768px) 160px, 178px"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                      className="object-cover"
                     />
                   </button>
                   <p className="mt-2 text-sm sm:text-base font-semibold text-ink dark:text-white truncate">
@@ -755,7 +753,7 @@ export default function Home() {
               type="button"
               onClick={() => scrollGalleryBy("next")}
               aria-label="Next gallery items"
-              className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:bg-pink hover:text-white hover:border-pink hover:scale-105 active:scale-95 cursor-pointer"
+              className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 dark:bg-[#180010]/95 border border-[#31081F]/10 dark:border-white/10 text-ink dark:text-white shadow-lg backdrop-blur-md flex items-center justify-center transition-colors duration-200 hover:bg-pink hover:text-white hover:border-pink cursor-pointer"
             >
               <svg
                 width="20"
@@ -778,8 +776,8 @@ export default function Home() {
               <span
                 key={i}
                 className={`h-1.5 rounded-full transition-all duration-300 ${i === galleryDotIndex
-                    ? "w-5 bg-pink"
-                    : "w-1.5 bg-ink/20 dark:bg-white/20"
+                  ? "w-5 bg-pink"
+                  : "w-1.5 bg-ink/20 dark:bg-white/20"
                   }`}
               />
             ))}
@@ -788,7 +786,7 @@ export default function Home() {
       </section>
 
       {/* BACKGROUND CHECK */}
-      <section id="journey" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-24 md:mt-40">
+      <section id="journey" className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -796,34 +794,34 @@ export default function Home() {
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
             BACKGROUND CHECK
           </h2>
-          <p className="text-pink text-xl sm:text-2xl md:text-3xl font-bold mt-2 md:mt-3">
+          <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             My Journey So Far
           </p>
         </Reveal>
 
-        <div className="mt-14 md:mt-20 relative">
+        <div className="mt-10 md:mt-14 relative">
           {/* Timeline spine — left-aligned on mobile, centered on desktop */}
-          <div className="absolute left-[9px] sm:left-[11px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-pink via-magenta/50 to-pink/10 dark:from-pink dark:via-magenta/40 dark:to-pink/5" />
+          <div className="absolute left-[9px] sm:left-[11px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-[2px] rounded-full bg-gradient-to-b from-pink via-magenta/50 to-pink/10 dark:from-pink dark:via-magenta/40 dark:to-pink/5" />
 
-          <div className="space-y-16 md:space-y-8">
+          <div className="space-y-12 md:space-y-6">
             {backgroundExperiences.map((exp, i) => {
               const isEven = i % 2 === 0;
               return (
                 <Reveal key={exp.title} variant="up" delay={60 + i * 40}>
-                  <div className="relative md:grid md:grid-cols-2 md:gap-x-10 lg:gap-x-16 md:py-8">
+                  <div className="relative md:grid md:grid-cols-2 md:gap-x-10 lg:gap-x-16 md:py-5">
                     {/* Timeline node, centered on the spine */}
-                    <span className="absolute left-[10px] sm:left-[12px] md:left-1/2 top-1.5 md:top-7 -translate-x-1/2 z-10 flex items-center justify-center w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-pink to-magenta ring-4 ring-white dark:ring-ink shadow-md shrink-0" />
+                    <span className="absolute left-[10px] sm:left-[12px] md:left-1/2 top-1.5 md:top-5 -translate-x-1/2 z-10 flex items-center justify-center w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-gradient-to-br from-pink to-magenta ring-[3px] ring-white dark:ring-ink shadow-md shrink-0" />
 
                     {/* Period pill — sits on the "empty" side, opposite the card, desktop only */}
                     <div
                       className={`hidden md:flex ${isEven ? "order-1 justify-end pr-10 lg:pr-16" : "order-2 justify-start pl-10 lg:pl-16"
-                        } items-start pt-6`}
+                        } items-start pt-4`}
                     >
-                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs lg:text-sm font-bold shadow-md whitespace-nowrap">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-magenta to-pink text-white text-xs font-bold shadow-md whitespace-nowrap">
                         {exp.period}
                       </span>
                     </div>
@@ -838,7 +836,7 @@ export default function Home() {
                         {exp.period}
                       </span>
 
-                      <div className="rounded-2xl md:rounded-3xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-4 sm:p-5 md:p-6 transition-all duration-300 hover:-translate-y-1">
+                      <div className="rounded-2xl bg-white/80 dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/10 shadow-sm hover:shadow-lg dark:hover:shadow-pink/5 backdrop-blur-md p-3.5 sm:p-4 md:p-5 transition-all duration-300 hover:-translate-y-1">
                         <ExperienceItem
                           title={exp.title}
                           role={exp.role}
@@ -858,7 +856,7 @@ export default function Home() {
       </section>
 
       {/* ACADEMIC & TROPHIES */}
-      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-24 md:mt-40">
+      <section className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24">
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
@@ -866,46 +864,46 @@ export default function Home() {
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
             ACADEMIC &amp; TROPHIES
           </h2>
-          <p className="text-pink text-xl sm:text-2xl md:text-3xl font-bold mt-2 md:mt-3">
+          <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             Where it started
           </p>
         </Reveal>
 
-        <div className="mt-6 md:mt-8 space-y-10 md:space-y-14">
+        <div className="mt-6 md:mt-8 space-y-8 md:space-y-12">
           <Reveal variant="up" delay={60}>
             <div>
-              <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white">
+              <h3 className="font-bold text-xl sm:text-2xl md:text-3xl text-ink dark:text-white">
                 Gunadarma University
               </h3>
-              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-ink/90 dark:text-white/90 mt-1">
+              <p className="text-base sm:text-lg md:text-xl font-bold text-ink/90 dark:text-white/90 mt-1">
                 Bachelor of Information Systems{" "}
                 <span className="text-pink font-bold">| GPA: 3.78 / 4.00</span>
               </p>
-              <p className="text-lg sm:text-xl md:text-2xl font-bold text-ink/80 dark:text-white/80 mt-1 mb-4">
+              <p className="text-sm sm:text-base md:text-lg font-bold text-ink/70 dark:text-white/70 mt-0.5 mb-4">
                 2022 - 2026
               </p>
 
-              <div className="space-y-3 md:space-y-4 text-xl sm:text-2xl md:text-[26px] lg:text-[29px] text-ink/90 dark:text-white/90 leading-relaxed">
-                <div className="flex items-start gap-3">
-                  <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
-                  <p>
+              <div className="space-y-2.5 md:space-y-3 text-base sm:text-lg md:text-xl text-ink/90 dark:text-white/90 leading-relaxed w-full">
+                <div className="flex items-start gap-3 w-full">
+                  <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
+                  <p className="text-justify flex-1 min-w-0">
                     <strong>Key Focus :</strong> Systems Analysis, Database Management, Software Engineering, and Web Development.
                   </p>
                 </div>
 
-                <div>
-                  <div className="flex items-start gap-3">
-                    <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
+                <div className="w-full">
+                  <div className="flex items-start gap-3 w-full">
+                    <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
                     <p>
                       <strong>Trophy &amp; Achievement :</strong>
                     </p>
                   </div>
-                  <ul className="list-disc ml-12 md:ml-16 mt-2 space-y-1.5 text-xl sm:text-2xl md:text-[26px] lg:text-[29px]">
-                    <li>
+                  <ul className="list-disc ml-8 sm:ml-9 md:ml-10 mt-1.5 space-y-1 text-base sm:text-lg md:text-xl w-full">
+                    <li className="text-justify">
                       1st Place Winner — UI/UX Competition by Google Developer Groups on Campus (GDGoC) Gunadarma (2025).
                     </li>
                   </ul>
@@ -916,27 +914,27 @@ export default function Home() {
 
           <Reveal variant="up" delay={100}>
             <div>
-              <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white">
+              <h3 className="font-bold text-xl sm:text-2xl md:text-3xl text-ink dark:text-white">
                 SMK Bakti Mandiri Bekasi
               </h3>
-              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-ink/90 dark:text-white/90 mt-1">
+              <p className="text-base sm:text-lg md:text-xl font-bold text-ink/90 dark:text-white/90 mt-1">
                 Diploma in Multimedia
               </p>
-              <p className="text-lg sm:text-xl md:text-2xl font-bold text-ink/80 dark:text-white/80 mt-1 mb-4">
+              <p className="text-sm sm:text-base md:text-lg font-bold text-ink/70 dark:text-white/70 mt-0.5 mb-4">
                 2019 - 2022
               </p>
 
-              <div className="space-y-3 md:space-y-4 text-xl sm:text-2xl md:text-[26px] lg:text-[29px] text-ink/90 dark:text-white/90 leading-relaxed">
-                <div className="flex items-start gap-3">
-                  <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
-                  <p>
+              <div className="space-y-2.5 md:space-y-3 text-base sm:text-lg md:text-xl text-ink/90 dark:text-white/90 leading-relaxed w-full">
+                <div className="flex items-start gap-3 w-full">
+                  <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
+                  <p className="text-justify flex-1 min-w-0">
                     <strong>Key Focus :</strong> Graphic Design, Visual Layouts, Photographs, Video Production, and Digital Media Fundamentals.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <span className="inline-block w-6 md:w-8 h-1 md:h-1.5 bg-ink dark:bg-white rounded-full mt-[14px] md:mt-[18px] shrink-0"></span>
-                  <p>
+                <div className="flex items-start gap-3 w-full">
+                  <span className="inline-block w-5 md:w-6 h-[3px] bg-ink dark:bg-white rounded-full mt-[11px] md:mt-[13px] shrink-0"></span>
+                  <p className="text-justify flex-1 min-w-0">
                     Established the core artistic foundation in visual communication and design principles.
                   </p>
                 </div>
@@ -950,7 +948,7 @@ export default function Home() {
       <section
         id="works"
         ref={worksSectionRef}
-        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-24 md:mt-40 pb-28 md:pb-36"
+        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24 pb-20 md:pb-28"
       >
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
@@ -959,11 +957,11 @@ export default function Home() {
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
             VIEW MY WORKS
           </h2>
-          <p className="text-pink text-xl sm:text-2xl md:text-3xl font-bold mt-2 md:mt-3">
+          <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             selected works &amp; highlights
           </p>
         </Reveal>
@@ -1088,47 +1086,47 @@ export default function Home() {
                 </div>
 
                 {/* Card Info Section */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between gap-3">
+                <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-2.5">
                   <div>
                     {/* Project Type / Category + Tag */}
-                    <div className="flex flex-wrap items-center gap-1.5 mb-2.5">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border border-[#B91372]/20 dark:border-pink/30">
+                    <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border border-[#B91372]/20 dark:border-pink/30">
                         {project.category}
                       </span>
-                      <span className="text-xs font-normal text-ink/50 dark:text-white/45">
+                      <span className="text-[10px] font-normal text-ink/50 dark:text-white/45">
                         #{project.tag}
                       </span>
                     </div>
 
                     {/* Project Name */}
-                    <h3 className="font-bold text-base sm:text-lg md:text-xl text-ink dark:text-white group-hover:text-pink transition-colors line-clamp-2 leading-snug">
+                    <h3 className="font-bold text-sm sm:text-base md:text-lg text-ink dark:text-white group-hover:text-pink transition-colors line-clamp-2 leading-snug">
                       {project.title}
                     </h3>
                   </div>
 
                   {/* CTA to View Details + Available Links Indicator */}
-                  <div className="pt-2.5 border-t border-[#31081F]/5 dark:border-white/5 text-xs sm:text-sm font-bold text-pink flex items-center justify-between">
+                  <div className="pt-2 border-t border-[#31081F]/5 dark:border-white/5 text-[11px] sm:text-xs font-bold text-pink flex items-center justify-between">
                     <span>View Details</span>
                     {project.links && (
                       <div className="flex items-center gap-1.5 text-ink/40 dark:text-white/40">
                         {project.links.prototype && (
                           <span title="Figma Prototype available" className="hover:text-pink transition-colors">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg>
                           </span>
                         )}
                         {project.links.github && (
                           <span title="GitHub repository available" className="hover:text-pink transition-colors">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
                           </span>
                         )}
                         {project.links.instagram && (
                           <span title="Instagram post available" className="hover:text-pink transition-colors">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                           </span>
                         )}
                         {project.links.twibbon && (
                           <span title="Twibbon campaign available" className="hover:text-pink transition-colors">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
                           </span>
                         )}
                         {project.links.live && (
@@ -1137,8 +1135,8 @@ export default function Home() {
                             className="hover:text-pink transition-colors"
                           >
                             <svg
-                              width="12"
-                              height="12"
+                              width="10"
+                              height="10"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -1158,8 +1156,8 @@ export default function Home() {
                             className="hover:text-pink transition-colors"
                           >
                             <svg
-                              width="12"
-                              height="12"
+                              width="10"
+                              height="10"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -1180,8 +1178,8 @@ export default function Home() {
                             className="hover:text-pink transition-colors"
                           >
                             <svg
-                              width="12"
-                              height="12"
+                              width="10"
+                              height="10"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -1219,7 +1217,7 @@ export default function Home() {
                 aria-label="Previous page"
                 className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === 1
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
-                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
               >
                 <svg
@@ -1262,8 +1260,8 @@ export default function Home() {
                       aria-current={isActive ? "page" : undefined}
                       aria-label={`Page ${pageNum}`}
                       className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
-                        ? "bg-pink text-white shadow-md shadow-pink/30 ring-2 ring-pink/20 scale-105"
-                        : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white hover:scale-105 active:scale-95"
+                        ? "bg-pink text-white shadow-md"
+                        : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                         }`}
                     >
                       {pageNum}
@@ -1279,7 +1277,7 @@ export default function Home() {
                 aria-label="Next page"
                 className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${currentPage === totalPages
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
-                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
               >
                 <span className="hidden sm:inline">Next</span>
@@ -1303,7 +1301,7 @@ export default function Home() {
 
         {/* CERTIFICATES & LICENSES */}
         <div id="certificates-section" />
-        <Reveal variant="up" className="mt-24 md:mt-32">
+        <Reveal variant="up" className="mt-14 sm:mt-16 md:mt-20 lg:mt-24">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
             <Image
               src="/element-star.svg"
@@ -1314,7 +1312,7 @@ export default function Home() {
             />
             CERTIFICATES &amp; LICENSES
           </h2>
-          <p className="text-pink text-xl sm:text-2xl md:text-3xl font-bold mt-2 md:mt-3">
+          <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             recognized skills &amp; industry credentials
           </p>
         </Reveal>
@@ -1351,22 +1349,22 @@ export default function Home() {
         </Reveal>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mt-8 md:mt-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mt-8 md:mt-10">
           {displayedCertificates.map((cert, index) => {
             const isGunadarma = cert.category === "Gunadarma";
             const isLPK = cert.category === "LPK";
 
             return (
               <Reveal key={cert.id} variant="up" delay={(index % 6) * 50}>
-                <div className="group rounded-[26px] sm:rounded-[30px] border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-pink/40 relative overflow-hidden">
+                <div className="group rounded-[18px] sm:rounded-[22px] border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] p-3.5 sm:p-4 flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-pink/40 relative overflow-hidden">
                   {/* Subtle decorative glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-pink/5 rounded-full blur-3xl group-hover:bg-pink/15 transition-all pointer-events-none" />
 
                   <div>
                     {/* Header: Category Badge + Date */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center justify-between gap-1.5 mb-2">
                       <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border ${isGunadarma
+                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${isGunadarma
                           ? "bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border-[#B91372]/20 dark:border-pink/30"
                           : isLPK
                             ? "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300 border-blue-500/20"
@@ -1375,31 +1373,31 @@ export default function Home() {
                       >
                         {cert.category}
                       </span>
-                      <span className="text-xs font-bold text-ink/60 dark:text-white/60 flex items-center gap-1">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                      <span className="text-[10px] font-bold text-ink/60 dark:text-white/60 flex items-center gap-1">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
                         {cert.date}
                       </span>
                     </div>
 
                     {/* Certificate Title */}
-                    <h3 className="font-bold text-lg sm:text-xl text-ink dark:text-white group-hover:text-pink transition-colors leading-snug">
+                    <h3 className="font-bold text-sm sm:text-base text-ink dark:text-white group-hover:text-pink transition-colors leading-snug">
                       {cert.title}
                     </h3>
 
                     {/* Issuer */}
-                    <p className="text-xs sm:text-sm font-bold text-pink mt-1 mb-2.5">
+                    <p className="text-[11px] sm:text-xs font-bold text-pink mt-1 mb-2">
                       {cert.issuer}
                     </p>
 
                     {/* Credential ID + verification status */}
-                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <div className="mb-2 flex flex-wrap items-center gap-1.5">
                       {cert.credentialId && (
-                        <span className="text-xs font-normal px-2.5 py-1 rounded-lg bg-[#31081F]/5 dark:bg-white/5 text-ink/70 dark:text-white/70 border border-[#31081F]/5 dark:border-white/5 inline-block select-all">
+                        <span className="text-[10px] font-normal px-2 py-0.5 rounded-lg bg-[#31081F]/5 dark:bg-white/5 text-ink/70 dark:text-white/70 border border-[#31081F]/5 dark:border-white/5 inline-block select-all">
                           No. {cert.credentialId}
                         </span>
                       )}
                       <span
-                        className={`inline-flex items-center gap-1.5 text-xs font-bold ${cert.credentialUrl
+                        className={`inline-flex items-center gap-1 text-[10px] font-bold ${cert.credentialUrl
                           ? "text-emerald-600 dark:text-emerald-400"
                           : "text-ink/40 dark:text-white/40"
                           }`}
@@ -1414,7 +1412,7 @@ export default function Home() {
 
                     {/* Description */}
                     {cert.description && (
-                      <p className="text-xs sm:text-sm text-ink/75 dark:text-white/75 leading-relaxed mb-4">
+                      <p className="text-[11px] sm:text-xs text-ink/75 dark:text-white/75 leading-relaxed mb-3">
                         {cert.description}
                       </p>
                     )}
@@ -1423,11 +1421,11 @@ export default function Home() {
                   <div>
                     {/* Skills pills */}
                     {cert.skills && cert.skills.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#31081F]/5 dark:border-white/5 mb-4">
+                      <div className="flex flex-wrap gap-1 pt-2.5 border-t border-[#31081F]/5 dark:border-white/5 mb-3">
                         {cert.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="text-xs px-2.5 py-0.5 rounded-full bg-white dark:bg-white/10 text-ink/80 dark:text-white/80 border border-[#31081F]/10 dark:border-white/10 font-normal"
+                            className="text-[10px] px-2 py-0.5 rounded-full bg-white dark:bg-white/10 text-ink/80 dark:text-white/80 border border-[#31081F]/10 dark:border-white/10 font-normal"
                           >
                             #{skill}
                           </span>
@@ -1441,15 +1439,15 @@ export default function Home() {
                         href={cert.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-[#31081F]/15 dark:border-white/15 hover:border-pink text-xs sm:text-sm font-bold text-ink dark:text-white hover:text-pink hover:shadow-sm transition-all group/btn"
+                        className="inline-flex items-center justify-between w-full px-3 py-2 rounded-lg bg-white dark:bg-white/5 border border-[#31081F]/15 dark:border-white/15 hover:border-pink text-[11px] sm:text-xs font-bold text-ink dark:text-white hover:text-pink hover:shadow-sm transition-all group/btn"
                       >
-                        <span className="flex items-center gap-1.5">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                        <span className="flex items-center gap-1">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
                           <span>Verify Credential</span>
                         </span>
                         <svg
-                          width="14"
-                          height="14"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -1467,15 +1465,15 @@ export default function Home() {
                         href={cert.pdfPath}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-[#31081F]/15 dark:border-white/15 hover:border-pink text-xs sm:text-sm font-bold text-ink dark:text-white hover:text-pink hover:shadow-sm transition-all group/btn"
+                        className="inline-flex items-center justify-between w-full px-3 py-2 rounded-lg bg-white dark:bg-white/5 border border-[#31081F]/15 dark:border-white/15 hover:border-pink text-[11px] sm:text-xs font-bold text-ink dark:text-white hover:text-pink hover:shadow-sm transition-all group/btn"
                       >
-                        <span className="flex items-center gap-1.5">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+                        <span className="flex items-center gap-1">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
                           <span>View Certificate (PDF)</span>
                         </span>
                         <svg
-                          width="14"
-                          height="14"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -1510,7 +1508,7 @@ export default function Home() {
                 aria-label="Previous page"
                 className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === 1
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
-                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
               >
                 <svg
@@ -1553,8 +1551,8 @@ export default function Home() {
                       aria-current={isActive ? "page" : undefined}
                       aria-label={`Page ${pageNum}`}
                       className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${isActive
-                        ? "bg-pink text-white shadow-md shadow-pink/30 ring-2 ring-pink/20 scale-105"
-                        : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white hover:scale-105 active:scale-95"
+                        ? "bg-pink text-white shadow-md"
+                        : "bg-[#31081F]/5 dark:bg-white/10 text-ink/80 dark:text-white/80 hover:bg-pink hover:text-white dark:hover:bg-pink dark:hover:text-white"
                         }`}
                     >
                       {pageNum}
@@ -1570,7 +1568,7 @@ export default function Home() {
                 aria-label="Next page"
                 className={`group inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${certCurrentPage === certTotalPages
                   ? "opacity-25 cursor-not-allowed pointer-events-none bg-[#31081F]/5 dark:bg-white/5 text-ink/40 dark:text-white/40 border border-transparent"
-                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10 hover:shadow-md active:scale-95"
+                  : "bg-white dark:bg-[#180010] border border-[#31081F]/15 dark:border-white/15 text-ink/90 dark:text-white/90 hover:border-pink hover:text-pink hover:bg-pink/5 dark:hover:bg-pink/10"
                   }`}
               >
                 <span className="hidden sm:inline">Next</span>
@@ -1596,7 +1594,7 @@ export default function Home() {
       {/* LET'S CONNECT / CONTACT */}
       <section
         id="contact"
-        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-24 md:mt-40 pb-20 md:pb-28"
+        className="px-4 sm:px-8 max-w-[1360px] mx-auto mt-14 sm:mt-16 md:mt-20 lg:mt-24 pb-16 md:pb-24"
       >
         <Reveal variant="up">
           <h2 className="text-pink text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold flex items-center gap-3 sm:gap-4 tracking-tight">
@@ -1605,11 +1603,11 @@ export default function Home() {
               alt=""
               width={44}
               height={44}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 inline-block shrink-0 star-spin"
             />
             LET&apos;S CONNECT!
           </h2>
-          <p className="text-pink text-xl sm:text-2xl md:text-3xl font-bold mt-2 md:mt-3">
+          <p className="text-pink text-base sm:text-lg md:text-xl font-bold mt-1.5 md:mt-2">
             have a project in mind or want to collaborate? let&apos;s talk!
           </p>
         </Reveal>
@@ -1623,7 +1621,7 @@ export default function Home() {
               <span>Available for Freelance &amp; Full-Time Opportunities</span>
             </div>
 
-            <p className="text-base sm:text-lg lg:text-xl text-ink/80 dark:text-white/80 leading-relaxed pt-1">
+            <p className="text-sm sm:text-base md:text-lg text-ink/80 dark:text-white/80 leading-relaxed pt-1 text-justify">
               Whether you have a UI/UX design project, visual branding needs, freelance inquiry, or full-time opportunity, I&apos;m always excited to collaborate and create meaningful digital experiences.
             </p>
           </Reveal>
@@ -1723,7 +1721,7 @@ export default function Home() {
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Scroll to top"
-        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-pink text-white shadow-lg shadow-pink/30 flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-[#d01580] hover:scale-110 active:scale-95 ${showScrollTop ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
+        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-pink text-white shadow-lg shadow-pink/30 flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-[#d01580] ${showScrollTop ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
           }`}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1772,7 +1770,7 @@ export default function Home() {
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="absolute left-2 sm:left-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer hover:scale-110 shadow-lg"
+              className="absolute left-2 sm:left-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
               aria-label="Previous Project"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
@@ -1786,7 +1784,7 @@ export default function Home() {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-2 sm:right-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer hover:scale-110 shadow-lg"
+              className="absolute right-2 sm:right-6 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-pink text-white flex items-center justify-center transition-colors duration-200 border border-white/20 cursor-pointer shadow-lg"
               aria-label="Next Project"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
@@ -1861,7 +1859,7 @@ export default function Home() {
                         setActiveGalleryIndex(idx);
                       }}
                       className={`flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border ${isActive
-                        ? "bg-pink text-white border-pink shadow-lg shadow-pink/30 scale-105 ring-2 ring-white/30"
+                        ? "bg-pink text-white border-pink shadow-md"
                         : "bg-white/15 hover:bg-white/25 text-white/90 border-white/20"
                         }`}
                     >
@@ -1930,6 +1928,17 @@ export default function Home() {
                 </div>
               )}
 
+              {/* Group Project note */}
+              {selectedProject.groupDescription && (
+                <div
+                  className={`text-xs sm:text-sm md:text-[15px] text-white/95 leading-relaxed font-normal ${
+                    selectedProject.description ? "" : "pt-3 border-t border-white/15"
+                  }`}
+                >
+                  <p>{selectedProject.groupDescription}</p>
+                </div>
+              )}
+
               {/* Project External Links (Prototype, GitHub, Instagram, Twibbon, Live) */}
               {selectedProject.links && (
                 <div className="pt-3 border-t border-white/15 flex flex-wrap items-center gap-2.5">
@@ -1941,7 +1950,7 @@ export default function Home() {
                       href={selectedProject.links.prototype}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FA198B] hover:bg-[#ff309c] text-white shadow-md transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FA198B] hover:bg-[#ff309c] text-white shadow-md transition-colors"
                     >
                       {/* Figma / Prototype icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg>
@@ -1954,7 +1963,7 @@ export default function Home() {
                       href={selectedProject.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/20 hover:bg-white/30 text-white border border-white/25 shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/20 hover:bg-white/30 text-white border border-white/25 shadow-sm transition-colors"
                     >
                       {/* GitHub icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
@@ -1967,7 +1976,7 @@ export default function Home() {
                       href={selectedProject.links.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white shadow-sm transition-colors"
                     >
                       {/* Instagram icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -1980,7 +1989,7 @@ export default function Home() {
                       href={selectedProject.links.twibbon}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#B91372] hover:bg-[#d01580] text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#B91372] hover:bg-[#d01580] text-white shadow-sm transition-colors"
                     >
                       {/* Twibbon / Campaign icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
@@ -1993,7 +2002,7 @@ export default function Home() {
                       href={selectedProject.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-colors"
                     >
                       {/* Globe icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
@@ -2006,7 +2015,7 @@ export default function Home() {
                       href={selectedProject.links.handbook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-colors"
                     >
                       {/* PDF / Document icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
@@ -2019,7 +2028,7 @@ export default function Home() {
                       href={selectedProject.links.guidebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-colors"
                     >
                       {/* PDF / Document icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
@@ -2089,36 +2098,36 @@ function ExperienceItem({
 }) {
   return (
     <div>
-      <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-ink dark:text-white">
+      <h3 className="font-bold text-base sm:text-lg md:text-xl text-ink dark:text-white">
         {title} <span className="text-pink font-bold">| {role}</span>
       </h3>
       {!hidePeriod && (
-        <p className="text-sm sm:text-base md:text-lg font-bold text-ink/80 dark:text-white/80 mt-1 mb-3">
+        <p className="text-xs sm:text-sm md:text-base font-bold text-ink/80 dark:text-white/80 mt-1 mb-2">
           {period}
         </p>
       )}
 
       <div
-        className={`space-y-2 md:space-y-3 text-sm sm:text-base md:text-lg text-ink/90 dark:text-white/90 leading-relaxed ${hidePeriod ? "mt-2 md:mt-3" : ""
+        className={`space-y-1.5 md:space-y-2 text-xs sm:text-sm md:text-base text-ink/90 dark:text-white/90 leading-relaxed ${hidePeriod ? "mt-2" : ""
           }`}
       >
-        <div className="flex items-start gap-3">
-          <span className="inline-block w-5 md:w-6 h-1 bg-ink dark:bg-white rounded-full mt-[10px] md:mt-[12px] shrink-0"></span>
-          <p>
+        <div className="flex items-start gap-2.5">
+          <span className="inline-block w-4 md:w-5 h-[2px] bg-ink dark:bg-white rounded-full mt-[8px] md:mt-[9px] shrink-0"></span>
+          <p className="text-justify flex-1">
             <strong>Overview :</strong> {overview}
           </p>
         </div>
 
         <div>
-          <div className="flex items-start gap-3">
-            <span className="inline-block w-5 md:w-6 h-1 bg-ink dark:bg-white rounded-full mt-[10px] md:mt-[12px] shrink-0"></span>
+          <div className="flex items-start gap-2.5">
+            <span className="inline-block w-4 md:w-5 h-[2px] bg-ink dark:bg-white rounded-full mt-[8px] md:mt-[9px] shrink-0"></span>
             <p>
               <strong>Key Contributions :</strong>
             </p>
           </div>
-          <ul className="list-disc ml-10 md:ml-12 mt-2 space-y-1 text-sm sm:text-base md:text-lg">
+          <ul className="list-disc ml-8 md:ml-10 mt-1.5 space-y-1 text-xs sm:text-sm md:text-base">
             {contributions.map((c, i) => (
-              <li key={i}>{c}</li>
+              <li key={i} className="text-justify">{c}</li>
             ))}
           </ul>
         </div>
