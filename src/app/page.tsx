@@ -78,7 +78,7 @@ function Reveal({
 }
 
 const ITEMS_PER_PAGE = 12;
-const CERT_ITEMS_PER_PAGE = 6;
+const CERT_ITEMS_PER_PAGE = 8;
 
 function getCertYear(dateStr: string): number {
   const matches = dateStr.match(/\d{4}/g);
@@ -1678,7 +1678,7 @@ export default function Home() {
 
             {/* 2. LinkedIn */}
             <a
-              href="https://www.linkedin.com/in/susiana-salsa-putri"
+              href="https://www.linkedin.com/in/susiana-salsa"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center justify-between p-3.5 sm:p-5 rounded-2xl bg-[#FAF7F9] dark:bg-[#160010] border border-[#31081F]/10 dark:border-white/10 hover:border-[#0077B5]/50 hover:shadow-md transition-all"
@@ -1689,7 +1689,7 @@ export default function Home() {
                 </div>
                 <div>
                   <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-[#0077B5] block mb-0.5">LinkedIn</span>
-                  <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">Susiana Salsa Putri</span>
+                  <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">Susiana Salsa</span>
                 </div>
               </div>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-ink/40 dark:text-white/40 group-hover:text-pink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
@@ -1708,7 +1708,7 @@ export default function Home() {
                 </div>
                 <div>
                   <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-ink/60 dark:text-white/60 block mb-0.5">GitHub</span>
-                  <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">susianasalsa</span>
+                  <span className="text-sm sm:text-base font-bold text-ink dark:text-white group-hover:text-pink transition-colors">Susiana Salsa</span>
                 </div>
               </div>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-ink/40 dark:text-white/40 group-hover:text-pink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
