@@ -790,15 +790,15 @@ export const projectsData: ProjectItem[] = [
     category: "Video Editing",
     institution: "SMK Bakti Mandiri",
     tag: "Short Movie • Ujikom SMK",
-    image: "/project smk/IMPACT.mp4",
-    video: "/project smk/IMPACT.mp4",
+    image: "/project smk/impact_poster.jpg",
+    video: "https://drive.google.com/file/d/1-m5_CsnNVQlD-37cQ589LJ4ozxi6s1dp/view?usp=sharing",
     width: 1920,
     height: 1080,
     featured: true,
     description:
       "Short movie \"IMPACT\" yang diproduksi dan diedit sebagai proyek Uji Kompetensi Keahlian (Ujikom) Multimedia saat bersekolah di SMK Bakti Mandiri. Meliputi proses sinematografi, penyusunan naskah cerita, directing, video editing, ritme cutting, color grading sinematik, serta penataan audio mixing dan sound effects untuk menghadirkan pesan cerita yang kuat dan menggugah.",
     links: {
-      video: "/project smk/IMPACT.mp4",
+      video: "https://drive.google.com/file/d/1-m5_CsnNVQlD-37cQ589LJ4ozxi6s1dp/view?usp=sharing",
     },
   },
   {

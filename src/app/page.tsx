@@ -136,16 +136,14 @@ function ProjectCard({
       <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-3.5 sm:p-5">
         {isVideo ? (
           <div className="relative w-full h-full flex items-center justify-center bg-black/90 rounded-xl overflow-hidden">
-            <video
-              src={`${project.video || project.image}#t=0.5`}
-              preload="metadata"
-              muted
-              playsInline
-              className="block w-full h-full object-cover scale-[1.05] group-hover:scale-[1.12] transition-transform duration-500 ease-out select-none pointer-events-none"
+            <img
+              src={project.image}
+              alt={project.title}
+              className="block w-full h-full object-cover scale-[1.05] group-hover:scale-[1.12] transition-transform duration-500 ease-out select-none"
             />
             {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/25">
-              <div className="w-12 h-12 rounded-full bg-pink/90 text-white flex items-center justify-center shadow-lg shadow-pink/50 group-hover:scale-110 group-hover:bg-pink transition-all">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/15 transition-colors">
+              <div className="w-12 h-12 rounded-full bg-pink/95 text-white flex items-center justify-center shadow-lg shadow-pink/50 group-hover:scale-110 group-hover:bg-pink transition-all">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="translate-x-0.5">
                   <polygon points="5 3 19 12 5 21 5 3" />
                 </svg>
@@ -1898,15 +1896,25 @@ export default function Home() {
             <div className="relative w-full h-[36vh] sm:h-[50vh] md:h-[62vh] flex items-center justify-center">
               {selectedProject.video || selectedProject.category === "Video Editing" ? (
                 <div className="relative w-full h-full flex items-center justify-center bg-black/90 rounded-2xl overflow-hidden shadow-2xl p-2 sm:p-4">
-                  <video
-                    src={selectedProject.video || selectedProject.image}
-                    controls
-                    autoPlay
-                    playsInline
-                    className="max-h-[50vh] md:max-h-[58vh] max-w-full rounded-xl object-contain shadow-2xl"
-                  >
-                    Your browser does not support HTML5 video.
-                  </video>
+                  {(selectedProject.video || selectedProject.links?.video)?.includes("drive.google.com") ? (
+                    <iframe
+                      src={(selectedProject.video || selectedProject.links?.video || "").replace(/\/view(\?.*)?$/, "/preview")}
+                      className="w-full h-full max-h-[50vh] md:max-h-[58vh] rounded-xl border-0 shadow-2xl"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                      title={selectedProject.title}
+                    />
+                  ) : (
+                    <video
+                      src={selectedProject.video || selectedProject.image}
+                      controls
+                      autoPlay
+                      playsInline
+                      className="max-h-[50vh] md:max-h-[58vh] max-w-full rounded-xl object-contain shadow-2xl"
+                    >
+                      Your browser does not support HTML5 video.
+                    </video>
+                  )}
                 </div>
               ) : (
                 <>
@@ -2150,15 +2158,19 @@ export default function Home() {
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
                     </a>
                   )}
-                  {(selectedProject.links.video || selectedProject.category === "Video Editing") && (
+                  {(selectedProject.links?.video || selectedProject.category === "Video Editing") && (
                     <a
-                      href={selectedProject.links.video || selectedProject.video || selectedProject.image}
+                      href={selectedProject.links?.video || selectedProject.video || selectedProject.image}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FA198B] hover:bg-[#ff309c] text-white shadow-md transition-colors"
                     >
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
-                      <span>Watch Full Video</span>
+                      <span>
+                        {(selectedProject.links?.video || selectedProject.video || "").includes("drive.google.com")
+                          ? "Tonton Full Video (Google Drive)"
+                          : "Watch Full Video"}
+                      </span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
                     </a>
                   )}
