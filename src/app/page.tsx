@@ -99,6 +99,216 @@ function getPageNumbers(current: number, total: number) {
   return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
+function ProjectCard({
+  project,
+  onSelect,
+}: {
+  project: ProjectItem;
+  onSelect: (p: ProjectItem) => void;
+}) {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const isVideo = project.category === "Video Editing" || Boolean(project.video);
+  const hasGallery = Boolean(project.gallery && project.gallery.length > 1);
+
+  const currentImage =
+    hasGallery && project.gallery
+      ? project.gallery[slideIndex]?.image ?? project.image
+      : project.image;
+
+  const handlePrevSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!project.gallery) return;
+    setSlideIndex((prev) => (prev > 0 ? prev - 1 : project.gallery!.length - 1));
+  };
+
+  const handleNextSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!project.gallery) return;
+    setSlideIndex((prev) => (prev < project.gallery!.length - 1 ? prev + 1 : 0));
+  };
+
+  return (
+    <div
+      onClick={() => onSelect(project)}
+      className="group relative rounded-[20px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
+    >
+      {/* Media Container */}
+      <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-3.5 sm:p-5">
+        {isVideo ? (
+          <div className="relative w-full h-full flex items-center justify-center bg-black/90 rounded-xl overflow-hidden">
+            <video
+              src={`${project.video || project.image}#t=0.5`}
+              preload="metadata"
+              muted
+              playsInline
+              className="block w-full h-full object-cover scale-[1.05] group-hover:scale-[1.12] transition-transform duration-500 ease-out select-none pointer-events-none"
+            />
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/25">
+              <div className="w-12 h-12 rounded-full bg-pink/90 text-white flex items-center justify-center shadow-lg shadow-pink/50 group-hover:scale-110 group-hover:bg-pink transition-all">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="translate-x-0.5">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+            </div>
+            {/* Short Movie / Video indicator */}
+            <div className="absolute bottom-2.5 left-3 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-white text-[10px] font-bold flex items-center gap-1">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polygon points="23 7 16 12 23 17 23 7" />
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+              </svg>
+              <span>Short Movie</span>
+            </div>
+          </div>
+        ) : (
+          <>
+            <img
+              src={currentImage}
+              alt={project.title}
+              className="block w-full h-full object-contain object-center scale-[1.12] transition-transform duration-500 ease-out group-hover:scale-[1.18] select-none"
+            />
+
+            {/* In-Card Slide Controls if multiple photos */}
+            {hasGallery && project.gallery && (
+              <>
+                <button
+                  type="button"
+                  onClick={handlePrevSlide}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 border border-white/20 shadow-md cursor-pointer"
+                  aria-label="Previous photo in card"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextSlide}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 border border-white/20 shadow-md cursor-pointer"
+                  aria-label="Next photo in card"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+                {/* Dots indicator at bottom of card image */}
+                <div className="absolute bottom-2 inset-x-0 z-20 flex items-center justify-center gap-1 pointer-events-none">
+                  {project.gallery.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === slideIndex ? "w-4 bg-pink" : "w-1.5 bg-black/40 dark:bg-white/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        )}
+
+        {/* Top-Right Badge: Multi-photo or Video */}
+        {hasGallery && project.gallery && (
+          <div className="absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-sm text-white text-[10px] font-bold border border-white/20 flex items-center gap-1 shadow-sm">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <span>{slideIndex + 1}/{project.gallery.length}</span>
+          </div>
+        )}
+        {isVideo && (
+          <div className="absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full bg-pink/90 backdrop-blur-sm text-white text-[10px] font-bold border border-white/20 flex items-center gap-1 shadow-sm">
+            <span>HD Video</span>
+          </div>
+        )}
+
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 z-10 bg-black/40 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+          <span className="px-4 py-2 rounded-full bg-white text-ink text-xs sm:text-sm font-bold shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2">
+            <span>{isVideo ? "Play Full Video" : hasGallery ? "Explore Slides & Details" : "Preview Project"}</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Card Info Section */}
+      <div className="p-3.5 sm:p-5 flex flex-col flex-1 justify-between gap-2.5">
+        <div>
+          {/* Project Type / Category + Tag */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border border-[#B91372]/20 dark:border-pink/30">
+              {project.category}
+            </span>
+            <span className="text-[10px] font-normal text-ink/50 dark:text-white/45">
+              #{project.tag}
+            </span>
+          </div>
+
+          {/* Project Name */}
+          <h3 className="font-bold text-sm sm:text-base md:text-lg text-ink dark:text-white group-hover:text-pink transition-colors line-clamp-2 leading-snug">
+            {project.title}
+          </h3>
+        </div>
+
+        {/* CTA to View Details + Available Links Indicator */}
+        <div className="pt-2 border-t border-[#31081F]/5 dark:border-white/5 text-[11px] sm:text-xs font-bold text-pink flex items-center justify-between">
+          <span>{isVideo ? "Watch Video" : "View Details"}</span>
+          {project.links && (
+            <div className="flex items-center gap-1.5 text-ink/40 dark:text-white/40">
+              {project.links.prototype && (
+                <span title="Figma Prototype available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg>
+                </span>
+              )}
+              {project.links.github && (
+                <span title="GitHub repository available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
+                </span>
+              )}
+              {project.links.instagram && (
+                <span title="Instagram post available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </span>
+              )}
+              {project.links.twibbon && (
+                <span title="Twibbon campaign available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                </span>
+              )}
+              {project.links.live && (
+                <span title="Live website available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
+                </span>
+              )}
+              {(project.links.video || isVideo) && (
+                <span title="Video available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
+                </span>
+              )}
+              {project.links.handbook && (
+                <span title="Handbook / PDF available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                </span>
+              )}
+              {project.links.guidebook && (
+                <span title="Guidebook / PDF available" className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                </span>
+              )}
+              {project.links.pdf && (
+                <span title={project.links.pdf.toLowerCase().includes("cert") ? "Certificate PDF available" : "PDF Document available"} className="hover:text-pink transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string>("All Works");
   const [activeInstitution, setActiveInstitution] = useState<string>("All");
@@ -256,6 +466,14 @@ export default function Home() {
       label: "Web Development",
       count: projectsData.filter((p) => p.category === "Web Development").length,
     },
+    {
+      label: "Photography",
+      count: projectsData.filter((p) => p.category === "Photography").length,
+    },
+    {
+      label: "Video Editing",
+      count: projectsData.filter((p) => p.category === "Video Editing").length,
+    },
   ], []);
 
   const backgroundExperiences = useMemo(
@@ -301,7 +519,11 @@ export default function Home() {
   );
 
   const institutions = useMemo(() => [
-    { label: "All", display: "All Affiliation" },
+    {
+      label: "All",
+      display: "All Affiliation",
+      count: projectsData.length,
+    },
     {
       label: "Gunadarma I/O",
       display: "Gunadarma I/O",
@@ -326,6 +548,16 @@ export default function Home() {
       label: "Gunadarma Code Week 2.0",
       display: "Gunadarma Code Week 2.0",
       count: projectsData.filter((p) => p.institution === "Gunadarma Code Week 2.0").length,
+    },
+    {
+      label: "SMK Bakti Mandiri",
+      display: "SMK Bakti Mandiri",
+      count: projectsData.filter((p) => p.institution === "SMK Bakti Mandiri").length,
+    },
+    {
+      label: "Freelance",
+      display: "Freelance",
+      count: projectsData.filter((p) => p.institution === "Freelance").length,
     },
   ], []);
 
@@ -1066,141 +1298,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 md:gap-8 mt-5 sm:mt-6">
           {displayedProjects.map((project, index) => (
             <Reveal key={project.id} variant="up" delay={(index % 6) * 40}>
-              <div
-                onClick={() => setSelectedProject(project)}
-                className="group relative rounded-[20px] sm:rounded-[28px] overflow-hidden border border-[#31081F]/10 dark:border-white/10 bg-[#FAF7F9] dark:bg-[#160010] hover:border-pink/50 dark:hover:border-pink/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col h-full cursor-pointer text-left"
-              >
-
-                {/* Image Container */}
-                <div className="relative w-full aspect-[4/3] bg-white/70 dark:bg-black/30 overflow-hidden border-b border-[#31081F]/5 dark:border-white/5 flex items-center justify-center p-3.5 sm:p-5">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="block w-full h-full object-contain object-center scale-[1.12] transition-transform duration-500 ease-out group-hover:scale-[1.18] select-none"
-                  />
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 z-10 bg-black/40 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                    <span className="px-4 py-2 rounded-full bg-white text-ink text-xs sm:text-sm font-bold shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2">
-                      <span>Preview Project</span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Info Section */}
-                <div className="p-3.5 sm:p-5 flex flex-col flex-1 justify-between gap-2.5">
-                  <div>
-                    {/* Project Type / Category + Tag */}
-                    <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border border-[#B91372]/20 dark:border-pink/30">
-                        {project.category}
-                      </span>
-                      <span className="text-[10px] font-normal text-ink/50 dark:text-white/45">
-                        #{project.tag}
-                      </span>
-                    </div>
-
-                    {/* Project Name */}
-                    <h3 className="font-bold text-sm sm:text-base md:text-lg text-ink dark:text-white group-hover:text-pink transition-colors line-clamp-2 leading-snug">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  {/* CTA to View Details + Available Links Indicator */}
-                  <div className="pt-2 border-t border-[#31081F]/5 dark:border-white/5 text-[11px] sm:text-xs font-bold text-pink flex items-center justify-between">
-                    <span>View Details</span>
-                    {project.links && (
-                      <div className="flex items-center gap-1.5 text-ink/40 dark:text-white/40">
-                        {project.links.prototype && (
-                          <span title="Figma Prototype available" className="hover:text-pink transition-colors">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg>
-                          </span>
-                        )}
-                        {project.links.github && (
-                          <span title="GitHub repository available" className="hover:text-pink transition-colors">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" /></svg>
-                          </span>
-                        )}
-                        {project.links.instagram && (
-                          <span title="Instagram post available" className="hover:text-pink transition-colors">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                          </span>
-                        )}
-                        {project.links.twibbon && (
-                          <span title="Twibbon campaign available" className="hover:text-pink transition-colors">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
-                          </span>
-                        )}
-                        {project.links.live && (
-                          <span
-                            title="Live website available"
-                            className="hover:text-pink transition-colors"
-                          >
-                            <svg
-                              width="10"
-                              height="10"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2.2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <circle cx="12" cy="12" r="10" />
-                              <line x1="2" y1="12" x2="22" y2="12" />
-                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                            </svg>
-                          </span>
-                        )}
-                        {project.links.handbook && (
-                          <span
-                            title="Handbook / PDF available"
-                            className="hover:text-pink transition-colors"
-                          >
-                            <svg
-                              width="10"
-                              height="10"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                              <polyline points="14 2 14 8 20 8" />
-                              <line x1="9" y1="13" x2="15" y2="13" />
-                              <line x1="9" y1="17" x2="15" y2="17" />
-                            </svg>
-                          </span>
-                        )}
-                        {project.links.guidebook && (
-                          <span
-                            title="Guidebook / PDF available"
-                            className="hover:text-pink transition-colors"
-                          >
-                            <svg
-                              width="10"
-                              height="10"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                              <polyline points="14 2 14 8 20 8" />
-                              <line x1="9" y1="13" x2="15" y2="13" />
-                              <line x1="9" y1="17" x2="15" y2="17" />
-                            </svg>
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <ProjectCard project={project} onSelect={setSelectedProject} />
             </Reveal>
           ))}
         </div>
@@ -1796,52 +1894,68 @@ export default function Home() {
             className="relative max-w-5xl w-full max-h-[94vh] flex flex-col items-center justify-center overflow-y-auto py-2 custom-scrollbar animate-modalPopIn"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Image Preview Area */}
+            {/* Image or Video Preview Area */}
             <div className="relative w-full h-[36vh] sm:h-[50vh] md:h-[62vh] flex items-center justify-center">
-              <Image
-                src={
-                  selectedProject.gallery && selectedProject.gallery[activeGalleryIndex]
-                    ? selectedProject.gallery[activeGalleryIndex].image
-                    : selectedProject.image
-                }
-                alt={
-                  selectedProject.gallery && selectedProject.gallery[activeGalleryIndex]
-                    ? selectedProject.gallery[activeGalleryIndex].title
-                    : selectedProject.title
-                }
-                fill
-                priority
-                sizes="90vw"
-                className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] select-none rounded-xl transition-all duration-300"
-              />
-
-              {/* In-gallery Previous / Next buttons if multiple photos */}
-              {selectedProject.gallery && selectedProject.gallery.length > 1 && (
+              {selectedProject.video || selectedProject.category === "Video Editing" ? (
+                <div className="relative w-full h-full flex items-center justify-center bg-black/90 rounded-2xl overflow-hidden shadow-2xl p-2 sm:p-4">
+                  <video
+                    src={selectedProject.video || selectedProject.image}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="max-h-[50vh] md:max-h-[58vh] max-w-full rounded-xl object-contain shadow-2xl"
+                  >
+                    Your browser does not support HTML5 video.
+                  </video>
+                </div>
+              ) : (
                 <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveGalleryIndex((prev) =>
-                        prev > 0 ? prev - 1 : (selectedProject.gallery?.length ?? 1) - 1
-                      );
-                    }}
-                    className="absolute left-2 sm:left-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
-                    aria-label="Previous Photo"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="15 18 9 12 15 6" /></svg>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveGalleryIndex((prev) =>
-                        prev < (selectedProject.gallery?.length ?? 1) - 1 ? prev + 1 : 0
-                      );
-                    }}
-                    className="absolute right-2 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
-                    aria-label="Next Photo"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="9 18 15 12 9 6" /></svg>
-                  </button>
+                  <Image
+                    src={
+                      selectedProject.gallery && selectedProject.gallery[activeGalleryIndex]
+                        ? selectedProject.gallery[activeGalleryIndex].image
+                        : selectedProject.image
+                    }
+                    alt={
+                      selectedProject.gallery && selectedProject.gallery[activeGalleryIndex]
+                        ? selectedProject.gallery[activeGalleryIndex].title
+                        : selectedProject.title
+                    }
+                    fill
+                    priority
+                    sizes="90vw"
+                    className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] select-none rounded-xl transition-all duration-300"
+                  />
+
+                  {/* In-gallery Previous / Next buttons if multiple photos */}
+                  {selectedProject.gallery && selectedProject.gallery.length > 1 && (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveGalleryIndex((prev) =>
+                            prev > 0 ? prev - 1 : (selectedProject.gallery?.length ?? 1) - 1
+                          );
+                        }}
+                        className="absolute left-2 sm:left-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
+                        aria-label="Previous Photo"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="15 18 9 12 15 6" /></svg>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveGalleryIndex((prev) =>
+                            prev < (selectedProject.gallery?.length ?? 1) - 1 ? prev + 1 : 0
+                          );
+                        }}
+                        className="absolute right-2 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-pink text-white flex items-center justify-center transition-all duration-200 border border-white/20 cursor-pointer shadow-lg"
+                        aria-label="Next Photo"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><polyline points="9 18 15 12 9 6" /></svg>
+                      </button>
+                    </>
+                  )}
                 </>
               )}
             </div>
@@ -2033,6 +2147,35 @@ export default function Home() {
                       {/* PDF / Document icon */}
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
                       <span>Guidebook</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                    </a>
+                  )}
+                  {(selectedProject.links.video || selectedProject.category === "Video Editing") && (
+                    <a
+                      href={selectedProject.links.video || selectedProject.video || selectedProject.image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FA198B] hover:bg-[#ff309c] text-white shadow-md transition-colors"
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
+                      <span>Watch Full Video</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                    </a>
+                  )}
+                  {selectedProject.links.pdf && (
+                    <a
+                      href={selectedProject.links.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#B91372] hover:bg-[#d01580] text-white shadow-sm transition-colors"
+                    >
+                      {/* PDF / Document icon */}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                      <span>
+                        {selectedProject.links.pdf.toLowerCase().includes("cert")
+                          ? "View Certificate (PDF)"
+                          : "View PDF / Document"}
+                      </span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
                     </a>
                   )}

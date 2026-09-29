@@ -11,15 +11,30 @@ export interface ProjectLinks {
   live?: string;       // Link Live Website / Demo
   guidebook?: string;  // Link PDF Guidebook / dokumen panduan
   handbook?: string;   // Link PDF Handbook / dokumen panduan
+  pdf?: string;        // Link file PDF / dokumen
+  video?: string;      // Link video / file media
 }
 
 export interface ProjectItem {
   id: string;
   title: string;
-  category: "Graphic Design" | "UI/UX Design" | "Web Development";
-  institution: "Gunadarma I/O" | "Media Mahasiswa Gunadarma" | "UI/UX Case Study" | "Gunadarma University" | "Gunadarma Code Week 2.0";
+  category:
+  | "Graphic Design"
+  | "UI/UX Design"
+  | "Web Development"
+  | "Photography"
+  | "Video Editing";
+  institution:
+  | "Gunadarma I/O"
+  | "Media Mahasiswa Gunadarma"
+  | "UI/UX Case Study"
+  | "Gunadarma University"
+  | "Gunadarma Code Week 2.0"
+  | "SMK Bakti Mandiri"
+  | "Freelance";
   tag: string;
   image: string;
+  video?: string;
   width: number;
   height: number;
   featured?: boolean;
@@ -149,9 +164,6 @@ export const projectsData: ProjectItem[] = [
     featured: true,
     description:
       "A collaborative redesign of BCA Mobile Banking by Susiana Salsa Putri, Amara, Huwaida, and Rosalinda, focused on improving usability and modernizing the interface while maintaining BCA’s brand identity. The result offers cleaner navigation, clearer visuals, and a more secure, user-friendly banking experience.",
-    links: {
-      prototype: "https://www.figma.com/proto/bca-mobile-redesign-example",
-    },
   },
   {
     id: "uiux-ecommerce",
@@ -162,9 +174,6 @@ export const projectsData: ProjectItem[] = [
     image: "/uiux/mobille ecommerce.png",
     width: 6096,
     height: 2942,
-    links: {
-      prototype: "https://www.figma.com/proto/ecommerce-mobile-example",
-    },
     featured: true,
   },
   {
@@ -177,9 +186,17 @@ export const projectsData: ProjectItem[] = [
     width: 10272,
     height: 9372,
     featured: true,
+    description:
+      "NOTICE! is a minimalist note-taking web application that supports dynamic notes, to-do checklists, and bookmarks organized into custom folders. Built collaboratively as a university group assignment.",
     group: "Group Project",
     groupDescription:
       "Built as a group assignment for a university course, together with Gita Pangestuti (UI/UX Designer) and Cindy Novita Hidayat (Database); my role was the developer.",
+    gallery: [
+      {
+        image: "/uiux/notes.png",
+        title: "UI/UX Wireframes — NOTICE! Web App (Design by Gita Pangestuti)",
+      },
+    ],
     links: {
       github: "https://github.com/asacore/web-notes",
     },
@@ -244,8 +261,62 @@ export const projectsData: ProjectItem[] = [
   },
 
   /* ══════════════════════════════════════════════════════════════════
-     GUNADARMA I/O (Graphic Design)
+     GUNADARMA I/O (Graphic Design & Photography)
      ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "io-codefest-pdd-photography",
+    title: "Codefest 4.0 — Event Documentation & Photography",
+    category: "Photography",
+    institution: "Gunadarma I/O",
+    tag: "Event Photography • Divisi PDD",
+    image: "/project io/codefest (1).jpg",
+    width: 2000,
+    height: 1333,
+    featured: true,
+    gallery: [
+      {
+        image: "/project io/codefest (1).jpg",
+        title: "Awarding Ceremony — 1st Champion Codefest 4.0",
+      },
+      {
+        image: "/project io/codefest (3).jpg",
+        title: "Podium Session — Champions & Organizing Committee",
+      },
+      {
+        image: "/project io/codefest (4).jpg",
+        title: "Grand Photo — All Participants, Mentors & Committee",
+      },
+      {
+        image: "/project io/codefest (7).jpg",
+        title: "Hackathon Hacking Session & Participant Discussion",
+      },
+      {
+        image: "/project io/codefest (11).jpg",
+        title: "Live Competitive Programming on Stage",
+      },
+    ],
+    description:
+      "Dokumentasi fotografi resmi untuk rangkaian kompetisi teknologi Codefest 4.0 yang diselenggarakan oleh Gunadarma I/O. Bertanggung jawab penuh sebagai anggota Divisi PDD (Publikasi, Dekorasi, dan Dokumentasi) saat Codefest, yang meliput dan mendokumentasikan keseluruhan momen berharga dari awal hingga akhir acara—mulai dari sesi hackathon peserta, asistensi mentor, presentasi karya, hingga serah terima piala dan awarding ceremony kepada para juara.",
+    links: {
+      pdf: "/project io/certificate codefest 4.0.pdf",
+    },
+  },
+  {
+    id: "io-codefest-certificate-design",
+    title: "Codefest 4.0 — Official Certificate Design",
+    category: "Graphic Design",
+    institution: "Gunadarma I/O",
+    tag: "Certificate Design • Codefest 4.0",
+    image: "/project io/certificate codefest 4.0.png",
+    width: 1684,
+    height: 1190,
+    featured: true,
+    description:
+      "Desain sertifikat penghargaan dan partisipasi resmi untuk kompetisi teknologi Codefest 4.0 yang diselenggarakan oleh Gunadarma I/O. Mengusung identitas visual modern bertema deep blue dan neon tech nodes, tata letak tipografi yang proporsional, serta struktur pengesahan formal oleh Faculty Advisor, Lead Gunadarma I/O, dan Chief Executive Codefest 4.0.",
+    links: {
+      pdf: "/project io/certificate codefest 4.0.pdf",
+    },
+  },
   {
     id: "io-weekly-class-1",
     title: "Weekly Class IoT #1: Rheval Keiza",
@@ -708,5 +779,142 @@ export const projectsData: ProjectItem[] = [
     links: {
       instagram: "https://www.instagram.com/p/DJiRC8YSL9a/?stkn=MTg3bXZkZGg3YXUwYg==",
     }
+  },
+
+  /* ══════════════════════════════════════════════════════════════════
+     SMK Bakti Mandiri (Graphic Design, Photography & Video Editing)
+     ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "smk-short-movie-impact",
+    title: "Short Movie: IMPACT — Ujikom Multimedia SMK",
+    category: "Video Editing",
+    institution: "SMK Bakti Mandiri",
+    tag: "Short Movie • Ujikom SMK",
+    image: "/project smk/IMPACT.mp4",
+    video: "/project smk/IMPACT.mp4",
+    width: 1920,
+    height: 1080,
+    featured: true,
+    description:
+      "Short movie \"IMPACT\" yang diproduksi dan diedit sebagai proyek Uji Kompetensi Keahlian (Ujikom) Multimedia saat bersekolah di SMK Bakti Mandiri. Meliputi proses sinematografi, penyusunan naskah cerita, directing, video editing, ritme cutting, color grading sinematik, serta penataan audio mixing dan sound effects untuk menghadirkan pesan cerita yang kuat dan menggugah.",
+    links: {
+      video: "/project smk/IMPACT.mp4",
+    },
+  },
+  {
+    id: "smk-poster-iklan-oreo",
+    title: "Mini Oreo Strawberry — Commercial Advertising Poster",
+    category: "Graphic Design",
+    institution: "SMK Bakti Mandiri",
+    tag: "Commercial Poster",
+    image: "/project smk/Poster Iklan Oreo.png",
+    width: 2481,
+    height: 3508,
+    featured: true,
+    description:
+      "Commercial advertising poster for Mini Oreo Strawberry featuring playful visual composition, vibrant product highlights, and engaging promotional copy.",
+  },
+  {
+    id: "smk-poster-dimsum",
+    title: "Dimsum Mentai 'Savöry' — Promotional Food Poster",
+    category: "Graphic Design",
+    institution: "SMK Bakti Mandiri",
+    tag: "Food & Beverage Poster",
+    image: "/project smk/poster_dimsum.png",
+    width: 1191,
+    height: 1684,
+    description:
+      "Promotional poster design for Dimsum Mentai by Savöry, crafted with appetizing photography, bold headline typography, and clear promotional pricing structure.",
+    links: {
+      pdf: "/project smk/Poster Dimsum.pdf",
+    },
+  },
+  {
+    id: "smk-photo-product-dimsum",
+    title: "Dimsum Mentai — Commercial Product Photography",
+    category: "Photography",
+    institution: "SMK Bakti Mandiri",
+    tag: "Product Photography",
+    image: "/project smk/photo_product_dimsum.png",
+    width: 1191,
+    height: 1684,
+    description:
+      "Commercial product photography and food styling session for Dimsum Mentai, capturing authentic textures, traditional bamboo steamers, and savory dipping sauce details.",
+    links: {
+      pdf: "/project smk/Photo Product Dimsum.pdf",
+    },
+  },
+  {
+    id: "smk-logo-produk-makanan",
+    title: "Savöry & Bon Appétit — Food Brand Identity & Logo Design",
+    category: "Graphic Design",
+    institution: "SMK Bakti Mandiri",
+    tag: "Brand Identity & Logo",
+    image: "/project smk/logo_produk_makanan.png",
+    width: 2160,
+    height: 1440,
+    description:
+      "Brand identity exploration and culinary logo concepts for 'Savöry' and 'Bon Appétit', featuring minimalist typography, culinary cutlery accents, and versatile color applications.",
+    links: {
+      pdf: "/project smk/Logo Produk Makanan.pdf",
+    },
+  },
+
+  /* ══════════════════════════════════════════════════════════════════
+     Freelance (Editorial, Photobook & Merchandise)
+     ══════════════════════════════════════════════════════════════════ */
+  {
+    id: "freelance-photobook-exxonmobil",
+    title: "ExxonMobil Permian & Houston Campus Visit — Photobook & Editorial Design",
+    category: "Graphic Design",
+    institution: "Freelance",
+    tag: "Editorial & Photobook",
+    image: "/project freelance/photobook_cover.png",
+    width: 1920,
+    height: 1080,
+    featured: true,
+    description:
+      "Comprehensive multi-page photobook and editorial publication designed for the ExxonMobil Permian and Houston Campus executive delegation visit (December 2021). Features refined visual grid layouts, curated photographic documentation, and corporate event storytelling.",
+    links: {
+      pdf: "/project freelance/Photobook_Unconventional and EMHC Visit.pdf",
+    },
+    gallery: [
+      {
+        image: "/project freelance/photobook_cover.png",
+        title: "Photobook Cover — ExxonMobil Permian & Houston Campus Visit",
+      },
+      {
+        image: "/project freelance/photobook_page_4.png",
+        title: "Executive Delegation Gathering & Arrival",
+      },
+      {
+        image: "/project freelance/photobook_page_3.png",
+        title: "Key Attendees & Photo Highlights",
+      },
+      {
+        image: "/project freelance/photobook_page_5.png",
+        title: "Facility Showcase & Banyu Urip Placard",
+      },
+      {
+        image: "/project freelance/photobook_page_10.png",
+        title: "Site Tour & Operational Presentation",
+      },
+      {
+        image: "/project freelance/photobook_page_15.png",
+        title: "Executive Tour & Discussion Session",
+      },
+    ],
+  },
+  {
+    id: "freelance-stiker-piala",
+    title: "Pesantren Ramadhan 1443H — Trophy & Plaque Sticker Design",
+    category: "Graphic Design",
+    institution: "Freelance",
+    tag: "Trophy & Merchandise",
+    image: "/project freelance/stiker piala.jpg",
+    width: 2479,
+    height: 2771,
+    description:
+      "Commemorative plaque and trophy emblem sticker design for RTQ Al-Akmaliyyah's Pesantren Ramadhan 1443H themed 'Indahnya Bersama Al-Qur'an di Bulan Ramadhan', featuring Islamic geometric motifs, gold crescents, and festive typography.",
   },
 ];

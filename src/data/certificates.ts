@@ -209,6 +209,18 @@ export const certificatesData: CertificateItem[] = [
      BOOTCAMP LUAR (Bootcamp & Program Eksternal)
      ══════════════════════════════════════════════════════════════════ */
   {
+    id: "cert-bootcamp-myskill-uiux-2023",
+    title: "Introduction to UI Design — Short Class",
+    issuer: "MySkill",
+    category: "Bootcamp",
+    date: "28 Januari 2023",
+    credentialId: "15811/UIX/LM/01/2023",
+    pdfPath: "/certificates/Susiana Salsa Putri E Sertifikat SC UIUX Jan 2023.pdf",
+    skills: ["UI/UX", "UI Design", "User Interface"],
+    description:
+      "Sertifikat penyelesaian Short Class dari MySkill.id dengan topik 'Introduction to UI Design' yang diselenggarakan oleh PT Linimuda Inspirasi Negeri.",
+  },
+  {
     id: "cert-bootcamp-generationgirl-2023",
     title: "Front End Week 1 — Summer Club Explorer",
     issuer: "Generation Girl",
