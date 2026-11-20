@@ -1,4 +1,4 @@
-export type CertificateCategory = "Gunadarma" | "LPK" | "Bootcamp";
+export type CertificateCategory = "BNSP" | "Gunadarma" | "LPK" | "Bootcamp";
 
 export interface CertificateItem {
   id: string;
@@ -6,20 +6,39 @@ export interface CertificateItem {
   issuer: string;
   category: CertificateCategory;
   date: string;
-  credentialId?: string;      // Nomor sertifikat, kalau tercantum di PDF
-  credentialUrl?: string;     // Link verifikasi ONLINE pihak ketiga (kalau ada)
-  pdfPath?: string;           // Path file PDF di /public/certificates (kalau tidak ada verifikasi online)
+  credentialId?: string;      
+  credentialUrl?: string;     
+  pdfPath?: string;           
   skills?: string[];
   description?: string;
 }
 
-// Semua file PDF ditaruh rata di satu folder: /public/certificates/
-// Sesuaikan nama file di bawah ini persis dengan nama file yang kamu taruh di folder itu.
 
-export const certificatesData: CertificateItem[] = [
-  /* ══════════════════════════════════════════════════════════════════
-     GUNADARMA (Internal Kampus, Pelatihan & Organisasi)
-     ══════════════════════════════════════════════════════════════════ */
+
+
+
+  export const certificatesData: CertificateItem[] = [
+
+  {
+    id: "cert-bnsp-junior-web-programmer-2026",
+    title: "Sertifikat Kompetensi — Junior Web Programmer",
+    issuer: "BNSP — Lembaga Sertifikasi Profesi Universitas Gunadarma",
+    category: "BNSP",
+    date: "15 Juli 2026",
+    credentialId: "62019 2514 5 0025811 2026",
+    pdfPath: "/certificates/Sertifikat Kompetensi BNSP_Susiana Salsa Putri.pdf",
+    skills: [
+      "Junior Web Programmer",
+      "Data Structures",
+      "Structured Programming",
+      "Debugging",
+      "Implement User Interface",
+      "Code Documentation",
+      "SKKNI",
+    ],
+    description:
+      "Sertifikat Kompetensi BNSP (No. Reg. TIK.705.01719.2026) pada bidang Pemrograman dengan okupasi Junior Web Programmer, berlaku 3 tahun. Mencakup 8 unit kompetensi SKKNI: struktur data, implementasi user interface, instalasi software tools pemrograman, penulisan kode sesuai guidelines & best practices, pemrograman terstruktur, penggunaan library/komponen pre-existing, pembuatan dokumen kode program, dan debugging.",
+  },
   {
     id: "cert-guna-web-basic-2023",
     title: "Dasar Pemrograman Berbasis Web",
@@ -176,10 +195,6 @@ export const certificatesData: CertificateItem[] = [
     description:
       "Pelatihan pembuatan aplikasi web dari pengenalan tools, pembuatan sistem, implementasi database, UI, hingga bahasa pemrograman.",
   },
-
-  /* ══════════════════════════════════════════════════════════════════
-     LPK LUAR (Lembaga Pelatihan Kerja & Sertifikasi Profesi)
-     ══════════════════════════════════════════════════════════════════ */
   {
     id: "cert-lpk-geti-uiux-mobile-2024",
     title: "Belajar Mendesain UI/UX Aplikasi Mobile bagi Calon Desainer UI/UX",
@@ -204,10 +219,6 @@ export const certificatesData: CertificateItem[] = [
     description:
       "Sertifikat penyelesaian program Membangun Website (Frontend Web Development) dengan predikat Sangat Baik, durasi belajar 15 jam, nilai aktivitas 85. Diverifikasi oleh Prakerja.",
   },
-
-  /* ══════════════════════════════════════════════════════════════════
-     BOOTCAMP LUAR (Bootcamp & Program Eksternal)
-     ══════════════════════════════════════════════════════════════════ */
   {
     id: "cert-bootcamp-myskill-uiux-2023",
     title: "Introduction to UI Design — Short Class",

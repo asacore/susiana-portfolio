@@ -264,6 +264,33 @@ export const projectsData: ProjectItem[] = [
      GUNADARMA I/O (Graphic Design & Photography)
      ══════════════════════════════════════════════════════════════════ */
   {
+    id: "io-journey-recap-2025-2026",
+    title: "Gunadarma I/O — Journey Recap 2025/2026",
+    category: "Graphic Design",
+    institution: "Gunadarma I/O",
+    tag: "Social Media Carousel",
+    image: "/project io/RECAP 1_LEFT.jpg",
+    width: 2160,
+    height: 2880,
+    featured: true,
+    gallery: [
+      {
+        image: "/project io/RECAP 1_LEFT.jpg",
+        title: "Journey Recap 2025/2026 — Part 1 (Left Feed)",
+      },
+      {
+        image: "/project io/RECAP 2_MIDDLE.jpg",
+        title: "Journey Recap 2025/2026 — Part 2 (Middle Feed)",
+      },
+      {
+        image: "/project io/RECAP 3_RIGHT.jpg",
+        title: "Journey Recap 2025/2026 — Part 3 (Right Feed)",
+      },
+    ],
+    description:
+      "A visual recap capturing the memorable moments, activities, and journey of Gunadarma I/O throughout the 2025/2026 period. Designed as a seamless Instagram carousel feed showcasing community milestones, workshops, events, and collaborative achievements.",
+  },
+  {
     id: "io-codefest-pdd-photography",
     title: "Codefest 4.0 — Event Documentation & Photography",
     category: "Photography",

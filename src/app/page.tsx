@@ -399,6 +399,12 @@ export default function Home() {
   const certCategories = useMemo(
     () => [
       { label: "All", display: "All Certificates", count: certificatesData.length },
+      
+      {
+        label: "BNSP",
+        display: "BNSP",
+        count: certificatesData.filter((c) => c.category === "BNSP").length,
+      },
       {
         label: "Gunadarma",
         display: "Gunadarma",
@@ -1447,6 +1453,7 @@ export default function Home() {
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5 mt-6 sm:mt-8 md:mt-10">
           {displayedCertificates.map((cert, index) => {
+            const isBNSP = cert.category === "BNSP";
             const isGunadarma = cert.category === "Gunadarma";
             const isLPK = cert.category === "LPK";
 
@@ -1460,11 +1467,13 @@ export default function Home() {
                     {/* Header: Category Badge + Date */}
                     <div className="flex items-center justify-between gap-1.5 mb-2">
                       <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${isGunadarma
-                          ? "bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border-[#B91372]/20 dark:border-pink/30"
-                          : isLPK
-                            ? "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300 border-blue-500/20"
-                            : "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/20"
+                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${isBNSP
+                          ? "bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/20"
+                          : isGunadarma
+                            ? "bg-[#B91372]/10 text-[#B91372] dark:bg-pink/20 dark:text-pink border-[#B91372]/20 dark:border-pink/30"
+                            : isLPK
+                              ? "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300 border-blue-500/20"
+                              : "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/20"
                           }`}
                       >
                         {cert.category}
